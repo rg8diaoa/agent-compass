@@ -168,6 +168,14 @@ agent-compass/
 └── .github/           ← CI（audit.yml + test-examples.yml）
 ```
 
+## 灵感来源
+
+- **ECC** — Agent 命令映射与持久记忆模式
+- **Andrej Karpathy's LLM Coding Style** — 目标驱动执行、"一个文件改善 Agent 行为"
+- **CodeToFlow** — 代码结构可视化理念
+
+核心方法论源自一个 41 文档/46 配置维度的多 Agent 协作实战项目。
+
 ## 许可证
 
 MIT
