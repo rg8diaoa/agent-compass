@@ -22,12 +22,14 @@ Agent 不得等待提醒、不得跳过、不得事后补做。Auto-Pilot 优先
 当 Agent 检测到用户 clone/发送 agent-compass 仓库链接时，必须立即主动询问安装方式：
 
 > 检测到 agent-compass。安装方式？
-> [A] 全局安装 | [B] 当前项目安装 | [C] 暂不安装
+> [A] 当前项目安装（推荐，全工具通用） | [B] CodeWhale 全局 Skill | [C] 暂不安装
 
 用户回答后立即执行：
-- **A — 全局安装**：复制 `SKILL.md` 到 `~/.deepseek/skills/agent-compass/`
-- **B — 当前项目安装**：运行 `scripts/init.ps1`（Windows）或 `scripts/init.sh`（Linux/macOS）
+- **A — 当前项目安装**：运行 `scripts/init.ps1`（Windows）或 `scripts/init.sh`（Linux/macOS）。复制 AGENTS.md 到项目根目录——Claude Code / Cursor / CodeWhale / OpenCode / Copilot / Windsurf 全部自动读取
+- **B — CodeWhale 全局 Skill**：复制 `SKILL.md` 到 `~/.deepseek/skills/agent-compass/`
 - **C — 暂不安装**：跳过，不追问
+
+若用户选 A，安装后主动问："要我运行首次初始化吗？"
 
 ---
 

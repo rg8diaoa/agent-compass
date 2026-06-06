@@ -24,27 +24,29 @@
 Agent 必须立即（同一 turn 内）主动询问，不得跳过：
 
 > 检测到 agent-compass。安装方式？
-> **[A] 全局安装** — SKILL.md → `~/.deepseek/skills/agent-compass/`（所有项目可用，CodeWhale 原生 Skill）
-> **[B] 当前项目安装** — 复制 AGENTS.md + 4 核心文档到当前项目根目录（仅本项目可用）
+> **[A] 当前项目安装（推荐）** — 复制 AGENTS.md 到项目根目录。Claude Code / Cursor / CodeWhale / OpenCode / Copilot / Windsurf 全支持——它们都自动读取项目根目录的 AGENTS.md
+> **[B] CodeWhale 全局 Skill** — 复制 SKILL.md 到 `~/.deepseek/skills/`，所有项目可用（仅 CodeWhale 用户有意义）
 > **[C] 暂不安装** — 跳过，以后再说
 
-用户选择 A/B/C 后立即执行对应操作：
+用户选择后立即执行：
 
-**A — 全局安装**：
-```powershell
-mkdir -Force ~/.deepseek/skills/agent-compass
-Copy-Item SKILL.md ~/.deepseek/skills/agent-compass/
-Write-Host "[agent-compass] 全局安装完成。重启会话生效。"
-```
-
-**B — 当前项目安装**：
+**A — 当前项目安装（全工具通用）**：
 ```powershell
 .\scripts\init.ps1 .
 # Linux/macOS: bash scripts/init.sh .
-Write-Host "[agent-compass] 当前项目安装完成。AGENTS.md + 4 核心文档已就位。"
+Write-Host "[agent-compass] 安装完成。AGENTS.md + 4 核心文档已就位。Claude Code/Cursor/CodeWhale/OpenCode/Copilot/Windsurf 均可自动读取。"
 ```
 
-安装完成后提示用户重启会话（全局安装）或直接进入首次初始化（当前项目安装）。用户说 C 则跳过，不追问。
+**B — CodeWhale 全局 Skill**：
+```powershell
+mkdir -Force ~/.deepseek/skills/agent-compass
+Copy-Item SKILL.md ~/.deepseek/skills/agent-compass/
+Write-Host "[agent-compass] CodeWhale Skill 安装完成。重启会话后 `/skill agent-compass` 可用。"
+```
+
+**C — 暂不安装**：跳过，不追问。
+
+安装完成后，若用户选了 A，Agent 应主动提示下一步："要我运行首次初始化吗？（生成 project-graph、反推设计依据、生成架构图）"
 
 ---
 
