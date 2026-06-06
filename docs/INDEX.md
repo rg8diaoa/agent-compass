@@ -14,6 +14,7 @@
 | L4_O01 | `L4_O01_design-rationale_设计依据.md` | 8 条关键设计决策 | 📝 |
 | L4_M01 | `L4_M01_changelog_变更日志.md` | 版本发布记录 | 📝 |
 | — | `HANDOFF.md` | 会话交接（含状态标记） | 🔥 |
+| — | `MEMORY.md` | 持久偏好与项目约束 | 🔥 |
 | — | `AUDIT_REPORT.md` | 14 维审计报告 | 📝 |
 | — | `project-graph.yaml` | 自身三层图（含 stability） | 🔥 |
 

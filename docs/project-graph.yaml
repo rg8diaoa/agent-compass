@@ -29,7 +29,18 @@ structure:
       - 09-security.md
       - 10-performance.md
       - 11-existing-project.md
+      - 12-human-agent-collaboration.md
+      - 13-agent-self-management.md
+      - 14-production-readiness.md
       - INDEX.md
+  skills/:
+    type: package
+    stability: stable
+    description: 5 个核心 Skill
+  agent_compass/:
+    type: package
+    stability: stable
+    description: CLI 入口
   templates/:
     type: package
     stability: stable
@@ -85,7 +96,7 @@ evolution:
     decision: MIT（最大化传播，零使用门槛）
     date: 2026-06-06
   - id: ADR-002
-    topic: 为什么方法论用 00-10 编号而非 L{Level}_{CAT}{NN}
+    topic: 为什么方法论用 00-14 编号而非 L{Level}_{CAT}{NN}
     decision: methodology/ 是教学材料，序号保持线性阅读顺序；项目文档才用 L 格式
     date: 2026-06-06
   - id: ADR-003
