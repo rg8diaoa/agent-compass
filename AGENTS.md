@@ -28,6 +28,13 @@
 - 跨文件引用时：必须 `grep` 验证路径存在。不许凭记忆说"应该有"
 - 工具失败时：报告中标注 [无法验证]。不许跳过也不许造假
 
+## 并行安全
+
+- 修改共享模块前 → 检查 HANDOFF 并行状态
+- 如果 locked → 等待或选其他模块
+- 如果 free → HANDOFF 加 [LOCKED] 条目
+- `project-graph.yaml` 可选字段：`locked_by` / `locked_until`
+
 ## 全局自动动作
 
 | 触发 | 动作 |
