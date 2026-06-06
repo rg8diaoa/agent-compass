@@ -1,0 +1,23 @@
+name: Docs Audit
+
+on:
+  push:
+    paths:
+      - 'templates/**'
+      - 'docs/**'
+      - 'methodology/**'
+  pull_request:
+    paths:
+      - 'templates/**'
+      - 'docs/**'
+      - 'methodology/**'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check naming convention
+        run: python scripts/check-naming.py templates/
+      - name: Run audit
+        run: python scripts/audit.py templates/
