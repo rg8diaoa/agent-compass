@@ -1,2 +1,0 @@
-[console_scripts]
-agent-compass = agent_compass.cli:main

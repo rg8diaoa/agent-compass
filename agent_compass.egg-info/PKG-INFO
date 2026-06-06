@@ -1,9 +1,0 @@
-Metadata-Version: 2.4
-Name: agent-compass
-Version: 0.1.0
-Summary: Agent 开发完整循环方法论 — CLI 工具包
-License: MIT
-Requires-Python: >=3.10
-License-File: LICENSE
-Requires-Dist: PyYAML>=6.0
-Dynamic: license-file
