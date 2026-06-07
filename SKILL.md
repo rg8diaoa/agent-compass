@@ -16,7 +16,8 @@
 - git commit 前 → 对照 14-production-readiness
 - 默认行为：完成任一模块后 → 追加测试任务到 checklist；每 5 轮自问"缺设计文档吗"
 - 批量创建文件 > 15 个时 → 分子代理并行（单个子代理 ≤ 15 文件，超时 180s。依据：世界模拟器 37 文件迁移时 230s 超时）
-- MCP Server：启动 `compass-mcp`，5 个 tool 可被 Code Agent 直接调用（query/audit/diff/decision/handoff），配置见 docs/mcp-tools.md
+- MCP Server：启动 `compass-mcp`，5 个 tool（query/audit/diff/decision/handoff），配置见 docs/mcp-tools.md
+- 首次安装 → `agent-compass setup` 一键完成初始化 + MCP 配置指南
 
 Agent 不得等待提醒、不得跳过、不得事后补做。Auto-Pilot 优先级高于工作模式（EXPLORE/PRECISE）。
 

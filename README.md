@@ -135,28 +135,22 @@ compass-mcp                         # 启动 MCP Server（5 tools: query/audit/d
 
 ## 三步开始
 
-### 步骤一：安装（30 秒）
+### 步骤一：安装（10 秒）
 
 ```bash
 pip install agent-compass
-agent-compass init /your/project
+cd your-project && agent-compass setup   # 一键初始化 + MCP 配置指南 + 诊断
 ```
 
-### 步骤二：发给 Agent
+### 步骤二：配置 MCP（10 秒）
 
-```
-我正在用 agent-compass 方法初始化项目。
-请读取 docs/project-graph.yaml — 告诉我当前项目结构。
-如果 project-graph 是空的，用 tree 和 grep 自动生成。
-```
+将 `setup` 输出的 JSON 复制到你的 Agent 工具配置文件（Claude Code → `.mcp.json` / CodeWhale → `~/.deepseek/mcp.json` / Cursor → `.cursor/mcp.json`），重启即用。
 
-### 步骤三：看 demo
+### 步骤三：开写
 
-```bash
-make todo-api-test   # 4/4 测试全绿
-```
+Agent 自动读取 AGENTS.md，按 Auto-Pilot 规则运行。MCP tools (`query`/`audit`/`diff`/`decision`/`handoff`) 在 Agent 会话中可被直接调用。
 
-已有项目接入 → `methodology/11-existing-project.md`（先搬 3 个文件，按需扩展）
+已有项目接入 → `methodology/11-existing-project.md`
 
 ---
 

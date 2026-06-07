@@ -40,4 +40,7 @@ if ($gitAnswer -eq 'y') {
     Write-Host "   git init done"
 }
 Write-Host ""
-Write-Host "下一步: 复制 examples\first-run.md 中的 prompt 发给 Agent 自动初始化 project-graph"
+Write-Host "下一步: 1) 运行 agent-compass setup 获取 MCP 配置"
+Write-Host "      2) 将 MCP 配置加入 Claude Code(.mcp.json) 或 CodeWhale(~/.deepseek/mcp.json)"
+Write-Host "      3) 重启 Agent, MCP tools 自动可用"
+Write-Host "      4) 或: 复制 examples\first-run.md 中的 prompt 发给 Agent 自动初始化 project-graph"

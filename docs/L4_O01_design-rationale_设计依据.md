@@ -37,5 +37,6 @@
 | 为什么 README 声明外挂层不侵入 | 降低集成门槛 | 世界模拟器集成验证了 agent-compass 的最大优势——全部新增在 docs/ 层，零代码侵入。这是区别于其他框架的核心卖点 |
 | 为什么用 gnhf 替代自建 worktree | 不重复造轮子 | gnhf 已解决 git worktree 隔离 + 原子提交 + agent 后端兼容的全部工程细节（1900+ stars）。agent-compass 只需生成 gnhf --goal 模板，安全执行层完全外包 |
 | 为什么 tests/ 暂不建 | 当前阶段偏差 | agent-compass 是方法论仓库——核心产出是文档和规则，不是运行时服务。sync/audit 脚本已有 mindstream 和 test-ac 两个真实项目验证。正式测试在 PyPI 发布前补 |
+| 为什么加 compass setup 命令 | 零配置体验 | 当前用户 pip install 后需手动 init+配 MCP+跑 doctor——三步断裂。setup 一键完成所有，输出可直接粘贴的 MCP 配置 JSON |
 | 为什么 L2_D01 必须反映当前架构 | 狗粮自指 | 本次架构变更方案中 Agent 跳过了更新 L2_D01——因为 L2_D01 本身已过时（只画了 4 层，实际 8 层）。修复：L2_D01 重写为当前全貌 + 设计先行表加自指规则 + 默认行为层加狗粮检查 |
 | 为什么用 MCP Server 暴露 agent-compass 功能 | Code Agent 原生集成 | 当前 Agent 靠读 YAML/MD 文件获取项目知识，MCP Server 把 sync/audit/query/decision/handoff 变为结构化 API——Agent 通过 MCP 协议直接调用，不需遍历文件系统。FastMCP 一行装饰器暴露现有函数 |
