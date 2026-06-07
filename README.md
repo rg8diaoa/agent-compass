@@ -133,22 +133,36 @@ compass-mcp                         # 启动 MCP Server（5 tools: query/audit/d
 
 ---
 
-## 三步开始
+## 安装
 
-### 步骤一：安装（10 秒）
+两条路，选一条：
+
+| 方式 | 适合 | 怎么做 |
+|------|------|--------|
+| 🤖 **Agent 自动装**（推荐） | 零配置，Agent 搞定一切 | 把本仓库 GitHub 链接发给 Agent，说"帮我装" |
+| 🛠️ **手动装** | 自己控制每一步 | `pip install agent-compass` → `agent-compass setup` |
+
+### 🤖 Agent 自动装（30 秒）
+
+把链接发给 Claude Code / CodeWhale / Cursor / OpenCode / Copilot / Windsurf，说"帮我装 agent-compass"。Agent 自动完成：
+
+1. 运行 init → AGENTS.md + 7 核心文档就位
+2. `pip install fastmcp` → MCP 依赖就绪
+3. 检测你的工具 → 自动配置 MCP（含 Windows 编码兼容）
+4. 提示 git init
+
+### 🛠️ 手动装
 
 ```bash
 pip install agent-compass
 cd your-project && agent-compass setup   # 一键初始化 + MCP 配置指南 + 诊断
 ```
 
-### 步骤二：配置 MCP（10 秒）
+将 `setup` 输出的 JSON 复制到 Agent 工具配置文件（Claude Code → `.mcp.json` / CodeWhale → `~/.deepseek/mcp.json` / Cursor → `.cursor/mcp.json`），重启即用。
 
-将 `setup` 输出的 JSON 复制到你的 Agent 工具配置文件（Claude Code → `.mcp.json` / CodeWhale → `~/.deepseek/mcp.json` / Cursor → `.cursor/mcp.json`），重启即用。
+### 开写
 
-### 步骤三：开写
-
-Agent 自动读取 AGENTS.md，按 Auto-Pilot 规则运行。MCP tools (`query`/`audit`/`diff`/`decision`/`handoff`) 在 Agent 会话中可被直接调用。
+Agent 自动读取 AGENTS.md，按 Auto-Pilot 规则运行。MCP tools 在 Agent 会话中可被直接调用。
 
 已有项目接入 → `methodology/11-existing-project.md`
 
