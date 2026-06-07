@@ -33,8 +33,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run agent-compass audit
         run: |
-          # 七维自动检查
-          python scripts/audit.py docs/ --format markdown > audit-report.md
+          # 8 维自动检查
+          python scripts/basic-audit.py docs/ --format markdown > audit-report.md
           cat audit-report.md
       - name: Check for blocking issues
         run: |
@@ -45,10 +45,10 @@ jobs:
           fi
 ```
 
-### audit.py 要检查什么（脚本骨架）
+### basic-audit.py 要检查什么（脚本骨架）
 
 ```python
-# scripts/audit.py — Agent 可以生成这个脚本，也可以手动维护
+# scripts/basic-audit.py — Agent 可以生成这个脚本，也可以手动维护
 import os, re, sys
 
 def check_naming(docs_dir):
@@ -106,7 +106,7 @@ def check_todos(docs_dir):
 git tag v1.3.0
 
 # 2. 生成 changelog（从 L4_M01 提取本周期条目）
-python scripts/gen-changelog.py v1.2.3..HEAD > RELEASE.md
+# 从 L4_M01 提取本周期 changelog 条目
 
 # 3. 发布
 git push origin v1.3.0
@@ -140,7 +140,7 @@ repos:
 
       - id: check-graph-sync
         name: 检查 project-graph 是否同步
-        entry: python scripts/check-graph.py
+        entry: python scripts/sync-graph.py --check
         language: python
         files: project-graph.yaml
         stages: [pre-commit]

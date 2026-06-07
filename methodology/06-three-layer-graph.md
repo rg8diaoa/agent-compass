@@ -124,7 +124,7 @@ evolution:
     topic: 认证方案选择（JWT vs Session）
     decision: JWT
     date: 2025-02-10
-    rationale_ref: docs/L4_O01_design-rationale.md#auth-jwt
+    rationale_ref: docs/L4_O01_design-rationale_设计依据.md#auth-jwt
   - id: COMMIT-a3f2b1
     topic: 修复 token 过期判断
     affected: [src/auth/login.py::refresh_token]

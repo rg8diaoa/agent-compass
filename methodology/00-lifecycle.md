@@ -59,7 +59,7 @@
 |---|---|
 | **查什么** | 无——这是起点 |
 | **做什么** | 将一句话需求展开为结构化需求列表 |
-| **产出** | `docs/L1_C01_requirements_需求定义.md`（功能列表、用户故事、验收条件） |
+| **产出** | `docs/L1_C01_phased-plan_实施路线.md`（模板在 templates/，功能列表、用户故事、验收条件） |
 | **更新图** | 不需要（还没有代码） |
 
 ```markdown
@@ -86,7 +86,7 @@
 |---|---|
 | **查什么** | 需求定义（L1_C01） |
 | **做什么** | 技术选型、模块划分、数据模型设计 |
-| **产出** | `docs/L2_D01_architecture_架构设计.md`、`docs/L2_G01_data-schema_数据结构.md` |
+| **产出** | `docs/L2_D01_architecture_架构设计.md`、`docs/L2_G01_data-schema_数据结构.md`（模板在 templates/，按需取用） |
 | **更新图** | 创建 `project-graph.yaml` 结构层——列出所有计划中的模块 |
 | **更新依据** | 每做一个技术选型，追加一行到 L4_O01（为什么选 X 而不是 Y） |
 
@@ -132,9 +132,9 @@ docs/
 ├── L1_A01_quickstart.md        ← 怎么跑起来
 ├── L1_A02_naming-convention.md ← 命名宪法
 ├── L1_B01_glossary.md          ← 术语定义
-├── L1_C01_requirements.md      ← 需求（阶段 1 产出）
+├── L1_C01_phased-plan.md       ← 需求（阶段 1 产出）
 ├── L2_D01_architecture.md      ← 架构（阶段 2 产出）
-├── L2_G01_data-schema.md       ← 数据结构（阶段 2 产出）
+├── L2_G01_data-schema.md       ← 数据结构（阶段 2 产出，模板）
 ├── L4_O01_design-rationale.md  ← 设计依据（阶段 2 产出）
 ├── HANDOFF.md                  ← 会话交接
 └── project-graph.yaml          ← 项目图（阶段 2 产出）
@@ -275,7 +275,7 @@ relations:
 **发布操作**：
 ```bash
 git tag v1.3.0
-python scripts/gen-changelog.py v1.2.3..HEAD > RELEASE.md
+# 从 L4_M01 提取本周期 changelog 条目
 git push origin v1.3.0
 gh release create v1.3.0 -F RELEASE.md
 ```
