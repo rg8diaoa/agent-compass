@@ -15,7 +15,7 @@
 | L4_M01 | `L4_M01_changelog_变更日志.md` | 版本发布记录（0.1.0 → 0.2.0） | 📝 |
 | — | `HANDOFF.md` | 会话交接（含状态标记） | 🔥 |
 | — | `MEMORY.md` | 持久偏好与项目约束 | 🔥 |
-| — | `AUDIT_REPORT.md` | 8 维审计报告 | 📝 |
+| — | `AUDIT_REPORT.md` | 14 维审计报告（代码已实现 8 维） | 📝 |
 | — | `project-graph.yaml` | 自身三层图（含 stability） | 🔥 |
 | — | `mcp-tools.md` | MCP Server 5 个 tool 参考 | ✅ |
 | — | `gnhf-task-template.md` | gnhf 夜间自动同步集成指南 | 📝 |
