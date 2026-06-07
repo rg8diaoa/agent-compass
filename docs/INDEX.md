@@ -11,13 +11,13 @@
 |:--|------|------|:--:|
 | L1_A01 | `L1_A01_quickstart_快速开始.md` | 如何贡献和扩展 agent-compass | 📝 |
 | L2_D01 | `L2_D01_architecture_架构设计.md` | agent-compass 自身 8 层模块架构 | ✅ |
-| L4_O01 | `L4_O01_design-rationale_设计依据.md` | 35+ 条关键设计决策 | 📝 |
+| L4_O01 | `L4_O01_design-rationale_设计依据.md` | 41+ 条关键设计决策 | 📝 |
 | L4_M01 | `L4_M01_changelog_变更日志.md` | 版本发布记录（0.1.0 → 0.2.0） | 📝 |
 | — | `HANDOFF.md` | 会话交接（含状态标记） | 🔥 |
 | — | `MEMORY.md` | 持久偏好与项目约束 | 🔥 |
-| — | `AUDIT_REPORT.md` | 14 维审计报告 | 📝 |
+| — | `AUDIT_REPORT.md` | 8 维审计报告 | 📝 |
 | — | `project-graph.yaml` | 自身三层图（含 stability） | 🔥 |
-| — | `mcp-tools.md` | MCP Server 5 个 tool 参考 | 📝 |
+| — | `mcp-tools.md` | MCP Server 5 个 tool 参考 | ✅ |
 | — | `gnhf-task-template.md` | gnhf 夜间自动同步集成指南 | 📝 |
 
 **不填充的分类**（agent-compass 是方法论仓库，非软件项目）：
