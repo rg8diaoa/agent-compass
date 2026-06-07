@@ -11,7 +11,7 @@
 ```
 agent-compass/
 │
-├── 规范层 (AGENTS.md + SKILL.md)     ← Agent 行为规则引擎
+├── 规范层: AGENTS.md + SKILL.md     ← Agent 行为规则引擎
 │   ├── Auto-Pilot 模式（自动动作 + 降级路径）
 │   ├── 设计先行原则（设计→确认→代码）
 │   ├── 讨论拦截 + Agent 决策权
