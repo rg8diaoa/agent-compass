@@ -94,6 +94,22 @@ Write-Host "[agent-compass] CodeWhale Skill 安装完成。重启会话后 `/ski
 
 ---
 
+## 新项目初始化检测
+
+当用户在对话中表达创建新项目/新工具/新应用的意图时——无论措辞如何（"帮我写一个日记应用""搭一个 API 服务""建一个爬虫""我需要一个任务管理工具"）——Agent 必须识别为**新项目创建意图**，不得跳过以下步骤：
+
+1. **骨架初始化**：运行 `scripts/init.ps1 .`（Windows）或 `scripts/init.sh .`（Linux/macOS），产出 AGENTS.md + docs/ 下 7 个核心文档
+2. **版本控制**：提示用户是否 git init
+3. **默认 checklist**：生成初始 checklist，第一项必须包含 git init + 文档补全 + 架构设计 + project-graph 生成
+4. **设计先行**：按设计先行原则，先出架构设计草稿（L2_D01），标注 [NEEDS_HUMAN_REVIEW]，等确认后才能写代码
+
+> 初始化完成前不得写实现代码。即使用户说"直接做"，Agent 也必须先完成骨架 + 架构设计草稿，否则就是裸写。
+
+EXPLORE 下骨架不可跳过（必须执行 init），设计文档可简化（标题 + 3 行要点）。
+PRECISE 下 design 文档必须达到模板完成标准。
+
+---
+
 ## 会话启动（Auto-Pilot 自动）
 
 1. 读 `docs/project-graph.yaml` → 项目结构
