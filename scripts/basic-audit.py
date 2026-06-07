@@ -181,7 +181,8 @@ def check_graph_schema(docs_dir: str) -> list[dict]:
             "severity": "WARN"
         })
     elif isinstance(relations, list):
-        valid_types = {"depends_on", "references", "indexes", "extends", "demonstrates", "tests"}
+        valid_types = {"depends_on", "references", "indexes", "extends", "demonstrates", "tests",
+                       "maps_to", "exposes", "calls", "routes", "mounts", "validates"}
         for i, rel in enumerate(relations):
             if not isinstance(rel, dict):
                 findings.append({
