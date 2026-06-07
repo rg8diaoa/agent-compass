@@ -11,7 +11,7 @@
 
 - 完整循环方法论（00-lifecycle）：8 阶段 Agent 工作流
 - 11 篇专题方法论 + 人机协作 + 自我管理
-- 35 个模板（31 编号 + 4 工具，16/16 分类全齐）
+- 36 个模板（31 编号 + 5 工具，16/16 分类全齐）
 - Prompt 模板集（5 个）+ first-run 初始化工单
 - 双语言示例（Python + Node.js）
 - 自身完整文档体系（docs/）
@@ -52,7 +52,36 @@
 - methodology/15-agent-ops.md：新建 Agent 操作手册
 - README：四样 → 五样拿手活 + 不侵入代码声明
 - ACKNOWLEDGMENTS：+gnhf 致谢
-- L4_O01：本会话追加 15+ 条决策（累计 35+ 条）
+- L4_O01：累计 44+ 条决策
+
+### MCP Server 上线
+- MCP Server 正式可用：5 tools（query/audit/diff/decision/handoff）
+- 首次邂逅检测自动配置 mcp.json（含 cwd + PYTHONIOENCODING）
+- 双向 MCP 检测：全局 + 项目两个方向互相补全
+- mcp-tools.md 完整 API 文档
+
+### MEMORY 机制重新设计
+- 自动生长：Agent 自动追加偏好/约束/教训
+- 全局与项目分离：agent-compass 自身 MEMORY 瘦身
+- init 脚本支持：一等公民 4→5（新增 MEMORY.md），双平台同步
+
+### 项目图补全
+- relations：空列表 → 14 条边（import/reference/read/write）
+- structure 修复：agent_compass 去重 + scripts/ 新增包
+
+### 规则加固
+- go 语义钉死：两步确认不可合并
+- 狗粮自检 4 项：架构/模板/图/规则一致性
+- 审计缓存陷阱规则
+- 讨论阶段 agent-compass 自身不豁免
+- 模板外脑规则：Agent 知道按需取用
+
+### 全维度审计
+- 8 维自动化全 PASS
+- 修复 12+ 处过时引用（methodology/ + 根目录）
+- INDEX/README/CHANGELOG 数字全面同步
+- 创建缺失模板：templates/HANDOFF.md + L4_O01
+- methodology/ 全部交叉引用验证
 
 ### 环境部署
-- PyYAML 安装 + CodeWhale 配置升级 + Skill 安装
+- init.ps1/sh 双平台同步 + CodeWhale instructions 同步
