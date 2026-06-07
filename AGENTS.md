@@ -19,11 +19,11 @@
 
 - **会话首次启动**：读 `docs/project-graph.yaml` → `docs/HANDOFF.md` → `docs/MEMORY.md`
 - **完成任一模块后**：检查 checklist 中是否有对应测试任务，没有则追加
-- **每 5 轮对话**：自问"有没有该写但还没写的设计文档？"
+- **每 5 轮对话**：自问两件事——"有没有该写但还没写的设计文档？"+"有没有该追加到 MEMORY.md 的教训但还没写？"
 - **项目首次初始化后**：提醒创建 `docs/HANDOFF.md` 和 `docs/MEMORY.md` 空模板
 - **⏳ 待补检测**：会话首次启动时，若 docs/ 中 ⏳ 待撰写状态的文档超过 3 份，Agent 应主动提醒"有 N 份文档待补充，要我填充吗？"。用户确认后按设计先行原则逐份填充——先出草稿→标注[NEEDS_HUMAN_REVIEW]→等确认→再写
 - **狗粮检查**：agent-compass 自身项目必须通过以下自检，否则先修再继续：① L2_D01 反映当前架构 ② init 脚本引用的 templates/ 文件全部存在 ③ project-graph relations 不为空（有代码时）④ AGENTS/SKILL/instructions 关键规则一致。agent-compass 自身必须吃自己的狗粮
-- **记忆自动生长**：Agent 在对话中发现新的用户偏好、项目约束、踩坑教训时，自动追加到 `docs/MEMORY.md` 对应小节。用户说"记住"→立即追加。不重复已有条目。模板注释（`<!-- ... -->`）仅第一次追加时删除
+- **记忆自动生长**：Agent 在对话中发现新的用户偏好、项目约束、踩坑教训时，**同一 turn 内立即追加**到 `docs/MEMORY.md` 对应小节，不得拖延到会话结束。用户说"记住"→立即追加。会话结束前最后一步：回顾本会话、确认所有教训已写入。不重复已有条目。模板注释（`<!-- ... -->`）仅第一次追加时删除
 - **MCP 缺失检测**：当项目已有 AGENTS.md 但 `mcp_agent-compass_*` tools 不可用时，Agent 应提示用户配置 MCP（`agent-compass setup` 或手动编辑 mcp.json）
 - **模板外脑**：docs/ 只有核心 8 文件。需要 API 契约、测试策略、部署方案等模板时，Agent 应知道从 agent-compass 仓库的 `templates/`（35 个）和 `methodology/`（16 篇）按需取用
 
