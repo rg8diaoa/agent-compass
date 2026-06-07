@@ -122,6 +122,7 @@ agent-compass init /your/project    # 一键生成核心文件
 agent-compass sync                  # 从代码自动同步 project-graph
 agent-compass audit                 # 8 维自动化审计（命名/引用/编号/残留/格式/追溯/覆盖/狗粮）
 agent-compass doctor                # 诊断缺什么
+compass-mcp                         # 启动 MCP Server（5 tools: query/audit/diff/decision/handoff）
 ```
 
 ## 数字
@@ -171,6 +172,7 @@ make todo-api-test   # 4/4 测试全绿
 | Agent 想写新模块 | 直接开始写 | 先出模块设计草稿，确认后再动工 |
 | 讨论新功能 | "好的，加一下"直接改 | 先整理方案要点，确认后再进设计 |
 | 建一个新项目 | 直接开始写代码 | init 骨架 + 架构草稿 → 确认 → 动工 |
+| 夜间自动同步 | 第二天 project-graph 已过时 | `gnhf --goal sync-task.md` 通宵跑 |
 
 ---
 
@@ -190,6 +192,7 @@ agent-compass/
 │
 ├── agent_compass/     ← CLI（init/sync/audit/doctor）
 ├── scripts/           ← sync-graph(符号级)/graph-to-mermaid/basic-audit(8维)/check-naming
+├── docs/              ← mcp-tools(5 tool API)+gnhf-task-template(夜间自动同步)
 ├── skills/            ← 5 个核心 Skill（可加载能力包）
 │
 ├── methodology/       ← 16 篇方法论（00循环 + 01-14专题 + 15-agent-ops）
@@ -206,6 +209,7 @@ agent-compass/
 - **ECC** — Agent 命令映射与持久记忆模式
 - **Andrej Karpathy's LLM Coding Style** — 目标驱动执行、"一个文件改善 Agent 行为"
 - **CodeToFlow** — 代码结构可视化理念
+- **gnhf** — git worktree 安全沙盒 + 原子提交模式，启发了 agent-compass 的安全设计
 
 核心方法论源自本人的一个 41 文档/46 配置维度的多 Agent 协作实战项目。
 
