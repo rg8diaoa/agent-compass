@@ -1,4 +1,4 @@
-# AgentPrecept ![version](https://img.shields.io/badge/version-v0.4.1-blue)
+# AgentPrecept ![version](https://img.shields.io/badge/version-v0.4.2-blue)
 
 > **AgentPrecept（原 agent-compass）与 Future AGI 的 "Agent Compass" 商业产品无关。**
 > 本项目的定位是 AI 编码 Agent 的方法论治理工具集——不是 LLM 可观测性平台。
@@ -237,7 +237,7 @@ agentprecept/
 │ └── mcp-tools.md        ← MCP 6 tool API
 ├── skills/            ← 5 个核心 Skill
 │
-├── methodology/       ← 16 篇方法论（00循环 + 01-14专题 + 15-agent-ops）
+├── methodology/       ← 18 篇方法论（M{1-4}_{A-D}{NN} 四板块体系）
 ├── templates/         ← 37 个模板（16分类全齐，init 核心 8 个）
 ├── examples/          ← Python/Node 示例 + prompt 模板 + first-run
 ├── reference/         ← 审计案例/多维图/横向对比/速查卡片
