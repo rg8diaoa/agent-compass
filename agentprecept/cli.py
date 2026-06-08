@@ -52,6 +52,27 @@ for doc in "${DESIGN_DOCS[@]}"; do
         exit 1
     fi
 done
+
+# --- Gate 3: commit size ---
+CHANGED_CODE_FILES=$(git diff --cached --name-only | grep -Ev '^docs/|\\.md$|\\.ya?ml$|\\.json$|\\.cfg$|\\.toml$' | wc -l | tr -d ' ')
+if [ "$CHANGED_CODE_FILES" -gt 15 ] 2>/dev/null; then
+    echo ""
+    echo "[AgentPrecept] WARNING: $CHANGED_CODE_FILES code files in one commit"
+    echo "[AgentPrecept] Consider splitting into smaller commits (1-3 files each)"
+    echo "[AgentPrecept] Skip: git commit --no-verify"
+    exit 1
+fi
+
+# --- Gate 4: NEEDS_HUMAN_REVIEW ---
+REVIEW_TAGGED=$(git diff --cached --name-only | xargs grep -l '\[NEEDS_HUMAN_REVIEW\]' 2>/dev/null)
+if [ -n "$REVIEW_TAGGED" ]; then
+    echo ""
+    echo "[AgentPrecept] WARNING: staged files contain [NEEDS_HUMAN_REVIEW]"
+    echo "[AgentPrecept] Confirm design docs first, then remove NEEDS_HUMAN_REVIEW."
+    echo "[AgentPrecept] Skip: git commit --no-verify"
+    exit 1
+fi
+
 exit 0
 """
     hook_path.parent.mkdir(parents=True, exist_ok=True)

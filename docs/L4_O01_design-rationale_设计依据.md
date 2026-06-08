@@ -57,3 +57,4 @@
 | 为什么 checklist 项必须对齐 commit 粒度 | 实战教训 | 粗粒度 checklist（"完成用户认证模块"）导致 item 停留过久，commit 过大不可独立 revert。标准：1-3 commit/item |
 | 为什么审计从 8 维扩展为 10 维 | 狗粮升级 | 外部评价指出"README 宣称与实现之间有落差"。新增维度 9（README 声明校验）+ 维度 10（设计覆盖检查） |
 | 为什么分支检查要有工程化保障 | 规则空洞 | MEMORY.md 记录了"重大变更走分支"但 pre-commit hook 不检查。升级 hook 追加 Gate 1（>10 文件 on main → 阻止）+ CI 侧新增维度 11（分支策略检查）。规则不能只靠 Agent 自觉 |
+| 为什么 commit 粒度和 NEEDS_HUMAN_REVIEW 要进 hook | 最后两道防线 | 单 commit >15 代码文件（Gate 3）+ staged 含 NEEDS_HUMAN_REVIEW（Gate 4）——这两项在 hook 层可自动化检测。CI 侧维度 12 补冗余告警。语义判断（"真的需要 15 文件一起改？"）仍是 Agent 自觉，但极端异常已被拦截 |

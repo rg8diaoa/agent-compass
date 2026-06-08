@@ -369,6 +369,28 @@ def check_branch_policy(docs_dir: str) -> list[dict]:
     return findings
 
 
+def check_commit_size(docs_dir: str) -> list[dict]:
+    """维度 12: commit 粒度——单 commit 是否过大"""
+    findings = []
+    import subprocess as sp
+    try:
+        changed = sp.run(["git", "diff", "--name-only", "HEAD~1", "HEAD"],
+                        capture_output=True, text=True, timeout=5).stdout.strip()
+        code_files = [f for f in changed.split("\n") if f and not f.startswith("docs/")
+                       and not f.endswith(".md") and not f.endswith(".yaml")
+                       and not f.endswith(".yml") and not f.endswith(".json")
+                       and not f.endswith(".cfg") and not f.endswith(".toml")]
+        if len(code_files) > 15:
+            findings.append({
+                "file": "commit size",
+                "issue": f"单 commit 含 {len(code_files)} 个代码文件（建议 ≤15）",
+                "severity": "WARN"
+            })
+    except Exception:
+        pass
+    return findings
+
+
 def check_design_coverage(docs_dir: str) -> list[dict]:
     """维度 10: 代码模块是否有对应的设计文档"""
     findings = []
@@ -433,6 +455,7 @@ def main():
         checks.append((check_readme_claims, "README声明校验"))
         checks.append((check_design_coverage, "设计覆盖检查"))
         checks.append((check_branch_policy, "分支策略检查"))
+        checks.append((check_commit_size, "commit粒度检查"))
 
     for check, name in checks:
         findings = check(docs_dir)
