@@ -18,7 +18,7 @@
 
 agentprecept 走第三条路：project-graph（30秒懂依赖关系）、设计依据（一行表记住为什么这样选）、会话交接（换班不丢进度）。文件是活的，项目长它也长。
 
-### 不侵入代码——全部新增在 docs/ 层
+### 不侵入代码——全部新增在外挂层
 
 agentprecept 的集成方式是"外挂层"——不修改任何现有源码文件，全部产出在 AGENTS.md + docs/ + .git/hooks/ + .github/workflows/ 下。适合已有项目的渐进式引入，也适合新项目的零风险冷启动。
 
@@ -131,7 +131,7 @@ agentprecept-mcp                         # 启动 MCP Server（6 tools: query/au
 
 - 16 篇方法论 + 36 个模板（16/16 分类全齐）+ 5 个 Skill
 - Python 和 Node.js 双语言可运行示例
-- 14 维审计框架 + 8 阶段生产就绪标准
+- 19 维审计框架 + 8 阶段生产就绪标准
 
 ---
 
@@ -182,7 +182,6 @@ Agent 自动读取 AGENTS.md，按 Auto-Pilot 规则运行。MCP tools 在 Agent
 | Agent 想写新模块 | 直接开始写 | 先出模块设计草稿，确认后再动工 |
 | 讨论新功能 | "好的，加一下"直接改 | 先整理方案要点，确认后再进设计 |
 | 建一个新项目 | 直接开始写代码 | init 骨架 + 架构草稿 → 确认 → 动工 |
-| 夜间自动同步 | 第二天 project-graph 已过时 | `gnhf --goal sync-task.md` 通宵跑 |
 
 ---
 
@@ -221,7 +220,7 @@ agentprecept/
 │ ├── HANDOFF.md          ← 会话交接
 │ ├── MEMORY.md           ← 持久记忆（自动生长）
 │ ├── L4_O01              ← 设计依据（44+ ADR）
-│ └── mcp-tools.md        ← MCP 5 tool API
+│ └── mcp-tools.md        ← MCP 6 tool API
 ├── skills/            ← 5 个核心 Skill
 │
 ├── methodology/       ← 16 篇方法论（00循环 + 01-14专题 + 15-agent-ops）
@@ -239,7 +238,7 @@ agentprecept/
 - **CodeToFlow** — 代码结构可视化理念
 - **gnhf** — git worktree 安全沙盒 + 原子提交模式，启发了 agentprecept 的安全设计
 
-核心方法论源自本人的一个 41 文档/46 配置维度的多 Agent 协作实战项目。
+核心方法论源自本人的“世界模拟器”多 Agent 协作实战项目。
 
 ## 许可证
 
