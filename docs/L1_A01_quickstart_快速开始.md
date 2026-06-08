@@ -37,4 +37,4 @@ agentprecept/
 
 1. 如果修改已锁定文档（✅）→ 同步更新 `docs/L4_M01_changelog_变更日志.md`
 2. 如果新增方法论 → `NN` 编号追加到现有末尾
-3. 修改后跑 `methodology/04-audit-framework.md` 中的审计清单
+3. 修改后跑 `methodology/M4_D00_audit-framework_审计框架.md` 中的审计清单

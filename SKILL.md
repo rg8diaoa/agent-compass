@@ -84,7 +84,7 @@ Agent 不得等待提醒、不得跳过、不得事后补做。Auto-Pilot 优先
 L{Level}_{Category}{NN}_{Slug}_{Title}.md
 ```
 
-分类码 A-P。详见 methodology/02-naming-is-navigation.md。
+分类码 A-P。详见 methodology/M3_C00_naming_命名即导航.md。
 
 ### 文档状态
 

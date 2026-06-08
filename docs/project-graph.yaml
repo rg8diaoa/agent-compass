@@ -74,25 +74,27 @@ structure:
   methodology/:
     type: package
     stability: stable
-    description: 方法论核心文档（16 篇）
+    description: 方法论核心文档（18 篇 M 体系：入门/协作/工程/运维四板块）
     children:
     - INDEX.md
-    - 00-lifecycle.md
-    - 01-why-docs-first.md
-    - 02-naming-is-navigation.md
-    - 03-design-rationale.md
-    - 04-audit-framework.md
-    - 05-handoff-pattern.md
-    - 06-three-layer-graph.md
-    - 07-dev-workflow.md
-    - 08-engineering.md
-    - 09-security.md
-    - 10-performance.md
-    - 11-existing-project.md
-    - 12-human-agent-collaboration.md
-    - 13-agent-self-management.md
-    - 14-production-readiness.md
-    - 15-agent-ops.md
+    - M1_A00_lifecycle_全生命周期.md
+    - M1_A01_why-docs-first_为什么文档先行.md
+    - M1_A02_natural-lang_自然语言编程.md
+    - M3_C00_naming_命名即导航.md
+    - M3_C01_design-rationale_设计依据.md
+    - M4_D00_audit-framework_审计框架.md
+    - M2_B00_handoff_交接模式.md
+    - M3_C02_project-graph_三层项目图.md
+    - M3_C03_dev-workflow_开发工作流.md
+    - M3_C04_engineering_工程化实践.md
+    - M3_C05_security_安全实践.md
+    - M3_C06_performance_性能优化.md
+    - M3_C08_existing-project_已有项目接入.md
+    - M2_B01_human-agent-collab_人机协作.md
+    - M2_B02_non-tech-review_非技术审产出.md
+    - M2_B03_agent-self-mgmt_Agent自管理.md
+    - M4_D01_production-readiness_生产就绪.md
+    - M4_D02_agent-ops_Agent运维.md
   skills/:
     type: package
     stability: stable
@@ -106,7 +108,7 @@ structure:
   agentprecept/:
     type: package
     stability: critical
-    description: CLI + MCP 层（init/sync/audit/doctor/hooks/gnhf + 6 MCP tools）
+    description: CLI + MCP 层（init/sync/audit/setup/hooks/gnhf + 6 MCP tools）
     design_docs:
       - L2_D01
     children:
@@ -117,7 +119,7 @@ structure:
   scripts/:
     type: package
     stability: critical
-    description: 核心引擎（sync-graph 5维/basic-audit 15维/init/design_gate_check/ripple_check）
+    description: 核心引擎（sync-graph 6维/basic-audit 15维/ripple_check/design_gate_check/init）
     design_docs:
       - L2_D01
     children:

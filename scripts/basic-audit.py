@@ -574,7 +574,7 @@ def check_experience(docs_dir: str) -> list[dict]:
 
 
 SELF_SELECT_DIMS = [
-    ("用户旅程", "README 能否 30 秒理解？有差异化对比？有已有项目接入指南（methodology/11-existing-project.md）？"),
+    ("用户旅程", "README 能否 30 秒理解？有差异化对比？有已有项目接入指南（methodology/M3_C08_existing-project_已有项目接入.md）？"),
     ("定位审计", "README 第一段说清楚 '是什么/不是什么' 了吗？定位是否贯穿始终？"),
     ("复用与可移植", "模板能独立拷贝使用？跨 Agent 工具兼容（Claude Code/Cursor/CodeWhale）？"),
     ("社区就绪度", "CHANGELOG 可读？Issue/PR 模板齐全？有反馈渠道（Discussion/FEEDBACK.md）？"),

@@ -297,6 +297,22 @@ Agent 不应该"重写第一个版本已经解决的问题"。每次维护动作
 
 ---
 
+## 各阶段进入/退出条件
+
+| 阶段 | 进入条件 | 退出标准 | Agent 自检 |
+|------|----------|----------|-----------|
+| 0.研究 | 收到新需求 | 找到 3 个类似项目 + 对比功能 | web_search 返回 ≥3 结果 |
+| 1.想法 | 研究完成 | 输出 3-5 条需求要点 | 人类确认 |
+| 2.设计 | 想法确认 | L2_D01 草稿完成 | [NEEDS_HUMAN_REVIEW] 已标注 |
+| 3.文档 | 设计确认 | project-graph.yaml 覆盖新模块 | agentprecept sync 通过 |
+| 4.开发 | 文档就绪 | checklist 全 completed | pre-commit 4 gates 通过 |
+| 5.测试 | 开发完成 | checklist 测试项全完成 | run_tests 通过 |
+| 6.审计 | 测试通过 | agentprecept audit --gate 0 FAIL | exit code 0 |
+| 7.修复 | 审计有 FAIL | 所有 FAIL → 0 | 重新 run audit |
+| 8.维护 | 修复完成 | HANDOFF 重写 + MEMORY 更新 | HANDOFF [CLOSING] |
+
+---
+
 ## 最小启动：30 分钟从零到完整循环
 
 不需要一次做到 8 个阶段。项目初期只需 3 步：

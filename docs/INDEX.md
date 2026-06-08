@@ -30,5 +30,5 @@ C/E/F/G/H/I/J/K/L/N/P — 见 `docs/L2_D01` §架构说明
 
 完整仓库导航见根目录 `README.md`。快速三条路径：
 - 用起来 → 复制 `AGENTS.md` + `templates/project-graph.yaml` + `templates/HANDOFF.md`
-- 理解 → 读 `methodology/00-lifecycle.md` + `07-dev-workflow.md`
+- 理解 → 读 `methodology/M1_A00_lifecycle_全生命周期.md` + `M3_C03_dev-workflow_开发工作流.md`
 - 搭建 → 复制 `templates/` 全部

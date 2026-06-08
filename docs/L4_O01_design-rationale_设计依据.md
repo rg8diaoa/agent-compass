@@ -33,7 +33,7 @@
 | 为什么 basic-audit 扩展到 8 维 | 审计覆盖面 | 方法论定义 14 维，原脚本只跑了 3 维。扩展到编号连续性/骨架⏳残留/图格式/设计追溯/狗粮审计/覆盖率共 8 维自动化——术语/内容/体验/定位/社区维需人工审计 |
 | 为什么 sync-graph.py 扩展到多语言 + 盲区检测 | 通用性 | 原只扫 Python import。新增 JS/TS import 扫描、语言分布检测、框架推断、盲区报告——让 Agent 知道哪些语言/框架有扫描器覆盖、哪些需要手动维护。参考 CodeToFlow 的语言驱动思路 |
 | 为什么命名规范允许弹性偏离 | 规范服务项目 | 世界模拟器 _V2 后缀与纯编号命名共存——多版本场景下版本标识比格式一致性更有信息量。偏离时在 HANDOFF 标注，audit 报 FAIL 为预期行为 |
-| 为什么需要 Agent 操作手册 | 操作知识沉淀 | 子代理超时、git 锁、Windows 分支命名、GBK 编码——这些都是实战踩坑但 agentprecept 没有文档化的 Agent 操作经验。新设 methodology/15-agent-ops.md |
+| 为什么需要 Agent 操作手册 | 操作知识沉淀 | 子代理超时、git 锁、Windows 分支命名、GBK 编码——这些都是实战踩坑但 agentprecept 没有文档化的 Agent 操作经验。新设 methodology/M4_D02_agent-ops_Agent运维.md |
 | 为什么 README 声明外挂层不侵入 | 降低集成门槛 | 世界模拟器集成验证了 agentprecept 的最大优势——全部新增在 docs/ 层，零代码侵入。这是区别于其他框架的核心卖点 |
 | 为什么用 gnhf 替代自建 worktree | 不重复造轮子 | gnhf 已解决 git worktree 隔离 + 原子提交 + agent 后端兼容的全部工程细节（1900+ stars）。agentprecept 只需生成 gnhf --goal 模板，安全执行层完全外包 |
 | 为什么 tests/ 暂不建 | 当前阶段偏差 | agentprecept 是方法论仓库——核心产出是文档和规则，不是运行时服务。sync/audit 脚本已有 mindstream 和 test-ac 两个真实项目验证。正式测试在 PyPI 发布前补 |
@@ -65,3 +65,4 @@
 | 为什么狗粮从 4 项存在性升级为自治健康度 | 狗粮即 Precept | 旧狗粮只检查 4 个文件在不在。新狗粮：图覆盖率（structure vs 实际文件）、审计自治（维度自检）、工具链就位（hook+CI）、规则一致性。项目是否被自己管理——不是 checklist，是健康报告 |
 | 为什么 design_gate 逻辑要和 hook 共享 | 单源码双入口 | Agent 可跳过 MCP tool——但 pre-commit hook Gate 2 调用同一份 design_gate_check.py。Agent 不调→hook 兜底。不再有两个实现各自漂移 |
 | 为什么 instructions.md 需要从 AGENTS.md 同步 | CodeWhale 全局配置一致性 | v0.4.0 新增 5 条默认行为（checklist 粒度/反馈提示/分支纪律/自选维度/版本规则）仅写入 AGENTS.md，`~/.deepseek/instructions.md` 遗漏。templates 数量 35→36（后修正为 37）、MCP tools 5→6 两处过时。instructions.md 是 AGENTS.md 的 CodeWhale 全局镜像，不同步导致 Agent 行为不一致 |
+| 为什么方法论要从时间序 NN 重命名为 M 体系 | 主题段预留 + 命名规范兼容 | 当前 16 篇方法论按创建时间递增编号（00-15），新增只能追加末尾，无法按主题插入。M 体系（M{1-4}_{A-D}{NN}）四个难度层级 × 四个方法类别，段内独立编号，新增不引发涟漪。与 docs/ 的 L 体系独立，命名规范中各占一节 | [NEEDS_HUMAN_REVIEW]

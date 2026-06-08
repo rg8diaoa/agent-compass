@@ -101,6 +101,33 @@ Agent 不需要每次会话读全部方法论。按需加载:
 
 ---
 
+## 自检工具
+
+### 改代码前
+```
+ripple_check.py <changed-file> → DIRECT/INDIRECT/SAME_PKG
+→ 知道影响几个文件
+→ 跨模块时谨慎拆分 commit
+```
+
+### 提交前
+```
+pre-commit 4 gates:
+  Gate 1: 分支策略（>10 文件 on main？）
+  Gate 2: 设计文档前置（改了代码但没设计文档？）
+  Gate 3: commit 粒度（>15 代码文件？）
+  Gate 4: NEEDS_HUMAN_REVIEW（staged 含待确认内容？）
+```
+
+### 会话结束前
+```
+1. 写 HANDOFF（IN_PROGRESS → [CLOSING]）
+2. 查 MEMORY.md 是否有新教训要追加
+3. agentprecept audit --scope=docs → 确保 0 FAIL
+```
+
+---
+
 ## AgentPrecept 工程化落地
 
 | 理念 | 实现 | 使用方式 |

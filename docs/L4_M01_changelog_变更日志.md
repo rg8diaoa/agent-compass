@@ -48,8 +48,8 @@
 
 ### 文档体系
 - L2_D01：4 层 → 8 层架构 + 数据流图
-- methodology/07-dev-workflow：双分支实验模式
-- methodology/15-agent-ops.md：新建 Agent 操作手册
+- methodology/M3_C03_dev-workflow_开发工作流.md：双分支实验模式
+- methodology/M4_D02_agent-ops_Agent运维.md：新建 Agent 操作手册
 - README：四样 → 五样拿手活 + 不侵入代码声明
 - ACKNOWLEDGMENTS：+gnhf 致谢
 - L4_O01：累计 44+ 条决策
