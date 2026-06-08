@@ -33,8 +33,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: Run agentprecept audit
         run: |
-          # 8 维自动检查
-          python scripts/basic-audit.py docs/ --format markdown > audit-report.md
+          # 15 维自动化审计
+          python scripts/basic-audit.py docs/ --gate > audit-report.md
           cat audit-report.md
       - name: Check for blocking issues
         run: |
@@ -45,7 +45,7 @@ jobs:
           fi
 ```
 
-### basic-audit.py 要检查什么（脚本骨架）
+### basic-audit.py 要检查什么（15 维参考）
 
 ```python
 # scripts/basic-audit.py — Agent 可以生成这个脚本，也可以手动维护

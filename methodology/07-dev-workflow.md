@@ -157,8 +157,8 @@
 
 3. **全链路审计**（不在 main 上执行）：
    ```bash
-   # 文档审计
-   python scripts/basic-audit.py docs/
+   # 文档审计（--gate 开启全部 15 维）
+   python scripts/basic-audit.py docs/ --gate
 
    # 代码 lint（按项目工具链适配）
    ruff check src/ 2>/dev/null || pylint src/ 2>/dev/null
