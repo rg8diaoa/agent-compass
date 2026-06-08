@@ -48,8 +48,8 @@ agentprecept 不是让 Agent 更强——**是给 Agent 一份施工图，给用
 | 业主验收 checklist——水电通了？墙平了？ | **14-production-readiness** — 8 阶段退出标准 × 可自动化验证项（✅脚本/⚠️Agent自检/❌人类） |
 | 装修特殊要求——不能用某种材料 | **MEMORY.md** — 跨版本持久偏好/项目约束/历史教训 |
 | 设计图纸——承重墙在哪、管线怎么走 | **L2_D01 架构设计** — 模块划分 + 职责描述 + 数据流 + 接口约定（设计先行原则强制前置） |
-| 改一面墙——旁边哪些会被牵连 | **ripple_check.py** — 涟漪分析（DIRECT/INDIRECT/SAME_PKG），改一个文件前先算影响半径 |
-| 三道安检——进场前、施工中、验收时 | **三层强制拦截** — ① MCP design_gate（软）→ ② pre-commit 4 gates（硬可跳过）→ ③ CI gate 15 维审计（硬不可跳过） |
+| 改一面墙——旁边哪些会被牵连 | **ripple_check.py** — 涟漪分析（DIRECT/INDIRECT/SAME_PKG），基于 project-graph 显式依赖计算影响半径 |
+| 三道安检——进场前、施工中、验收时 | **三层门禁体系** — ① MCP design_gate（Agent 自助）→ ② pre-commit hook（--no-verify 可跳过）→ ③ CI gate 15 维审计（不可跳过） |
 | 监理检查工具——15 维自动化巡检 | **basic-audit.py** — 命名/引用/编号/残留/图格式/追溯/覆盖率/狗粮/声明校验/设计覆盖/分支策略/commit粒度/术语一致/内容一致/体验审计，一行命令全跑（--gate 模式） |
 
 ---
@@ -60,7 +60,7 @@ agentprecept 不是让 Agent 更强——**是给 Agent 一份施工图，给用
 
 给 Agent 写一段话："本项目使用 FastAPI，数据库 PostgreSQL"。Agent 读一遍就忘了，下一轮重新遍历源码。
 
-agentprecept 把项目结构写成**机器可消费的 YAML 图**（structure / relations / evolution）。Agent 每次新会话读 30 秒，不需遍历源码即可重建心智模型。`stability` 字段区分改模块的风险等级。
+agentprecept 把项目结构写成**机器可消费的 YAML 图**（structure / relations / evolution）。Agent 每次新会话读取后快速定位模块关系，大幅减少遍历源码的需求。`stability` 字段区分改模块的风险等级。
 
 ### 2. 不懂代码的人也能审 Agent 产出 + 自动化审计
 
@@ -74,7 +74,7 @@ Agent 提交了架构设计——你对照 4 项：
 
 **15 维审计**：`agentprecept audit --gate` 一行命令跑完 15 维 4-scope（docs/code/git/config）。+ 4 维自选清单在报告末尾提示。
 
-**三层强制拦截**：改一行代码也得过三道门——① MCP `design_gate` 代码动工前强制设计文档就位 ② pre-commit hook 四道检查（分支/粒度/设计/确认）③ CI gate 15 维审计兜底，不可跳过。
+**三层门禁体系**：理想路径过三道检查——① MCP `design_gate` Agent 自助检查设计文档就位 ② pre-commit hook 四道检查（分支/粒度/设计/确认）③ CI gate 15 维审计兜底。实际生效取决于配置了哪几层。
 
 ### 3. 教训驱动——每条规则踩过坑
 
@@ -82,7 +82,7 @@ Agent 提交了架构设计——你对照 4 项：
 
 ### 4. 设计先行 + 讨论拦截——方案没对齐不动手
 
-Agent 拿到需求容易跳过设计直接写代码——或者在讨论中就顺手改了。agentprecept 强制三道拦截：
+Agent 拿到需求容易跳过设计直接写代码——或者在讨论中就顺手改了。agentprecept 定义了设计流程三道检查：
 
 ```
 讨论新功能 → 整理方案要点 → [NEEDS_HUMAN_REVIEW] → 确认
@@ -179,7 +179,7 @@ Agent 自动读取 AGENTS.md，按 Auto-Pilot 规则运行。MCP tools 在 Agent
 | 场景 | 没有 | 有 |
 |------|------|------|
 | 第一行代码 | Agent 不知道从哪开始 | 读 project-graph，30 秒 |
-| 修了一个 bug | 可能引入新 bug | 读依赖图，知道影响的 2 个文件 |
+| 修了一个 bug | 可能引入新 bug | 读依赖图，追踪显式依赖的关联文件 |
 | Agent 提方案 | "用 Session 吧" | 读 L4_O01——"去年已证明不行" |
 | 换了 Agent | "做到哪了？" | 读 HANDOFF——从下一步继续 |
 | 审 Agent 产出 | "看起来差不多" | 对照 4 项——"补一下这里" |
@@ -195,12 +195,22 @@ agentprecept 自身使用 agentprecept 管理——本文档体系即 `agentprec
 
 ---
 
+## 已知限制
+
+- **涟漪分析**：基于 project-graph 显式依赖，覆盖不了动态反射（`getattr`）、
+  猴子补丁和微服务间 HTTP/gRPC 调用。分布式项目建议配合 OpenTelemetry。
+- **设计门禁**：检查设计文档是否存在，不校验内容质量。质量把控依赖
+  [NEEDS_HUMAN_REVIEW] 人工确认步骤。
+- **安全审计**：15 维不含 SAST、secret scanning 和 Prompt 注入检测。
+  AgentPrecept 是方法论文档治理工具，不是安全扫描器。
+- **多语言支持**：sync-graph 自动扫描 Python/JS/TS，其他语言需手动维护 project-graph。
+
 ## 和类似工具的区别
 
 | | AgentPrecept | Cursor Rules | ROADMAP.md | CrewAI |
 |--|-------------|-------------|------------|--------|
 | 性质 | 方法论+工具集 | IDE 规则片段 | 单文件规划 | Agent 编排框架 |
-| 设计强制 | ✅ 三步拦截 | ❌ | ❌ | ❌ |
+| 设计规范 | ✅ 定义三步流程 | ❌ | ❌ | ❌ |
 | 项目结构图 | ✅ YAML 3层+自动扫描 | ❌ | ❌ | ❌ |
 | 脚本化审计 | ✅ 15 维 | ❌ | ❌ | ❌ |
 | 会话交接 | ✅ HANDOFF | ❌ | ❌ | ❌ |
