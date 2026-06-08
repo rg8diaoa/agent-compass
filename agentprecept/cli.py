@@ -294,10 +294,12 @@ def cmd_sync(src="src", graph="docs/project-graph.yaml"):
     subprocess.run([sys.executable, str(SCRIPTS / "sync-graph.py"), src, graph])
 
 
-def cmd_audit(docs="docs", gate=False):
+def cmd_audit(docs="docs", gate=False, scope_args=None):
     args = [sys.executable, str(SCRIPTS / "basic-audit.py"), docs]
     if gate:
         args.append("--gate")
+    if scope_args:
+        args.extend(scope_args)
     subprocess.run(args)
 
 
@@ -379,8 +381,10 @@ def main():
 
     elif cmd == "audit":
         gate = "--gate" in args
-        docs = next((a for a in args if a != "--gate"), "docs")
-        cmd_audit(docs=docs, gate=gate)
+        scope_next = [a for a in args if a.startswith("--scope")]
+        other = [a for a in args if a != "--gate" and not a.startswith("--scope")]
+        docs = other[0] if other else "docs"
+        cmd_audit(docs=docs, gate=gate, scope_args=scope_next)
 
     elif cmd == "doctor":
         cmd_doctor()

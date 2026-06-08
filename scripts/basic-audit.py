@@ -555,13 +555,8 @@ def _safe(s: str) -> str:
     return s.encode("gbk", errors="replace").decode("gbk")
 
 
-def main():
-    gate_mode = "--gate" in sys.argv
-    args = [a for a in sys.argv[1:] if a != "--gate"]
-    docs_dir = args[0] if args else "docs"
-    results = []
-
-    checks = [
+SCOPES = {
+    "docs": [
         (check_naming, "命名一致性"),
         (check_broken_links, "交叉引用完整性"),
         (check_numbering, "编号连续性"),
@@ -569,25 +564,53 @@ def main():
         (check_graph_schema, "项目图格式"),
         (check_design_trace, "设计追溯"),
         (check_coverage, "覆盖率"),
+        (check_terminology, "术语一致性"),
+        (check_content_consistency, "内容一致性"),
+        (check_experience, "体验审计"),
+    ],
+    "code": [
+        (check_readme_claims, "README声明校验"),
+        (check_design_coverage, "设计覆盖检查"),
+    ],
+    "git": [
+        (check_branch_policy, "分支策略检查"),
+        (check_commit_size, "commit粒度检查"),
+    ],
+    "config": [
         (check_dogfood, "狗粮审计"),
-    ]
+    ],
+}
+
+
+def main():
+    gate_mode = "--gate" in sys.argv
+    scope_args = [a for a in sys.argv[1:] if a.startswith("--scope")]
+    args = [a for a in sys.argv[1:] if a not in scope_args and a != "--gate"]
+    docs_dir = args[0] if args else "docs"
+    results = []
+
+    scopes_to_run = set()
+    for sa in scope_args:
+        if "=" in sa:
+            scopes_to_run.update(sa.split("=", 1)[1].split(","))
+    if not scopes_to_run:
+        scopes_to_run = {"docs"}
     if gate_mode:
-        checks.append((check_readme_claims, "README声明校验"))
-        checks.append((check_design_coverage, "设计覆盖检查"))
-        checks.append((check_branch_policy, "分支策略检查"))
-        checks.append((check_commit_size, "commit粒度检查"))
-        checks.append((check_terminology, "术语一致性"))
-        checks.append((check_content_consistency, "内容一致性"))
-        checks.append((check_experience, "体验审计"))
+        scopes_to_run = {"docs", "code", "git", "config"}
 
-    for check, name in checks:
-        findings = check(docs_dir)
-        has_fail = any(item["severity"] == "FAIL" for item in findings)
-        status = "PASS" if not findings else "FAIL" if has_fail else "WARN"
-        results.append((name, status, findings))
+    for scope in ["docs", "code", "git", "config"]:
+        if scope not in scopes_to_run or scope not in SCOPES:
+            continue
+        for check, name in SCOPES[scope]:
+            findings = check(docs_dir)
+            has_fail = any(item["severity"] == "FAIL" for item in findings)
+            status = "PASS" if not findings else "FAIL" if has_fail else "WARN"
+            results.append((name, status, findings))
 
-    print("# 审计报告\n")
-    print(f"审计范围: {docs_dir}/")
+    print("# 审计报告")
+    print()
+    scope_str = ", ".join(sorted(scopes_to_run))
+    print(f"审计范围: {docs_dir}/  scope: {scope_str}")
     for name, status, findings in results:
         print(f"## [{status}] {name}")
         if findings:
@@ -599,13 +622,16 @@ def main():
 
     total_fail = sum(1 for _, s, _ in results if s == "FAIL")
     total_warn = sum(1 for _, s, _ in results if s == "WARN")
-    print(f"---\nFAIL {total_fail}  WARN {total_warn}")
+    print("---")
+    print(f"FAIL {total_fail}  WARN {total_warn}")
 
     if gate_mode:
-        print("\n## 自选维度（需人工/Agent 检查，不纳入 FAIL 计数）")
+        print()
+        print("## 自选维度（需人工/Agent 检查，不纳入 FAIL 计数）")
         for dim, desc in SELF_SELECT_DIMS:
             print(f"- [  ] {dim}: {desc}")
-        print("\n运行 agentprecept audit --self-select 让 Agent 逐维度检查")
+        print()
+        print("运行 agentprecept audit --self-select 让 Agent 逐维度检查")
 
     exit(1 if total_fail else 0)
 
