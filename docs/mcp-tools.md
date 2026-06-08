@@ -1,6 +1,6 @@
 # MCP Tools 参考
 
-agentprecept 通过 MCP Server 暴露 5 个 tool，供任何支持 MCP 的 Agent 调用。
+agentprecept 通过 MCP Server 暴露 6 个 tool，供任何支持 MCP 的 Agent 调用。
 
 ## 启动
 
@@ -44,7 +44,7 @@ python -m agentprecept.mcp_server
 
 ### 2. audit_run
 
-运行 8 维自动化审计。
+运行 15 维自动化审计（--gate 模式）。默认 8 维，--gate 追加维度 9-15。
 
 ```json
 // 请求

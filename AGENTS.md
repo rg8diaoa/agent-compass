@@ -26,7 +26,7 @@
 - **狗粮检查**：agentprecept 自身项目必须通过以下自检，否则先修再继续：① L2_D01 反映当前架构 ② init 脚本引用的 templates/ 文件全部存在 ③ project-graph relations 不为空（有代码时）④ AGENTS/SKILL/instructions 关键规则一致。agentprecept 自身必须吃自己的狗粮
 - **记忆自动生长**：Agent 在对话中发现新的用户偏好、项目约束、踩坑教训时，**同一 turn 内立即追加**到 `docs/MEMORY.md` 对应小节。追加前先 grep 确认无相似条目（不凭记忆判断）；已有条目可更新（替换旧行），不可重复追加。追加后读回验证格式正确。用户说"记住"→立即追加。会话结束前回顾确认全部已写入。模板注释（`<!-- ... -->`）仅第一次追加时删除
 - **MCP 缺失检测**：当项目已有 AGENTS.md 但 `mcp_agentprecept_*` tools 不可用时，Agent 应提示用户配置 MCP（`agentprecept setup` 或手动编辑 mcp.json）
-- **模板外脑**：docs/ 只有核心 8 文件。需要 API 契约、测试策略、部署方案等模板时，Agent 应知道从 agentprecept 仓库的 `templates/`（35 个）和 `methodology/`（16 篇）按需取用
+- **模板外脑**：docs/ 只有核心 8 文件。需要 API 契约、测试策略、部署方案等模板时，Agent 应知道从 agentprecept 仓库的 `templates/`（36 个）和 `methodology/`（16 篇）按需取用
 - **反馈提示**：HANDOFF 状态为 [CLOSING] 时，Agent 应提示："如果这次体验有用，花 2 分钟在 GitHub 填反馈模板"
 - **分支纪律**：涉及架构/重命名/多文件（>10 文件）的变更必须在独立分支上执行。pre-commit hook 强制拦截 main/master 分支上 >10 文件的 commit（可 `--no-verify` 跳过）；CI gate 维度 11 不可跳过
 - **自选维度检查**：每 5 轮对话检查自选维度（用户旅程/定位审计/复用/社区就绪度）是否退化。`agentprecept audit --gate` 报告末尾有自选清单

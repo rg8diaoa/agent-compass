@@ -89,7 +89,7 @@ L1_C01 → L2_D01 → L2_G01 → L2_G02 → L3_J01 → L3_K01
 | 文件 | 作用 | 状态 |
 |------|------|:--:|
 | `HANDOFF.md` | 会话交接记录（含状态标记） | 🔥 |
-| `AUDIT_REPORT.md` | 七维审计报告模板 | 📝 |
+| `AUDIT_REPORT.md` | 审计报告模板 | 📝 |
 | `project-graph.yaml` | 三层项目图（含 stability 字段） | 🔥 |
 
 ---

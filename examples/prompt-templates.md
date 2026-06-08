@@ -55,7 +55,7 @@
 ## 模板 4：做一次审计
 
 ```
-请对当前项目做一次完整的 agentprecept 七维审计：
+请对当前项目做一次完整的 agentprecept 审计（`agentprecept audit --gate`）：
 
 1. 命名一致性（docs/ 下所有文件名格式）
 2. 交叉引用完整性（文档间链接是否有效）
