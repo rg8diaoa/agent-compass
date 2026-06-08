@@ -299,9 +299,9 @@ def check_dogfood(docs_dir: str) -> list[dict]:
         root_files = set()
         for f in Path(".").iterdir():
             name = f.name
-            if name.startswith(".") or name in ("__pycache__", "agent_compass.egg-info", "diag-result.json"):
+            if name.startswith(".") or name in ("__pycache__", "agent_compass.egg-info", "diag-result.json", "build", "dist", ".pytest_cache"):
                 continue
-            root_files.add(name if f.is_dir() else name)
+            root_files.add(name + "/" if f.is_dir() else name)
         graph_keys = set(structure.keys())
         missing = root_files - graph_keys
         extra = graph_keys - root_files - set()  # 目录条目可多
@@ -626,7 +626,7 @@ def main():
             scopes_to_run.update(sa.split("=", 1)[1].split(","))
     if not scopes_to_run:
         scopes_to_run = {"docs"}
-    if gate_mode:
+    if gate_mode and not any(a.startswith("--scope") for a in sys.argv[1:]):
         scopes_to_run = {"docs", "code", "git", "config"}
 
     for scope in ["docs", "code", "git", "config"]:
