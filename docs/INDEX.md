@@ -15,9 +15,9 @@
 | L4_M01 | `L4_M01_changelog_变更日志.md` | 版本发布记录（0.1.0 → 0.2.0） | 📝 |
 | — | `HANDOFF.md` | 会话交接（含状态标记） | 🔥 |
 | — | `MEMORY.md` | 持久偏好与项目约束 | 🔥 |
-| — | `AUDIT_REPORT.md` | 14 维审计报告（8 维自动执行，6 维 Agent/用户按需触发） | 📝 |
+| — | `AUDIT_REPORT.md` | 15 维自动化审计报告（--gate 模式）+ 14 维方法论审计框架（含自选清单） | 📝 |
 | — | `project-graph.yaml` | 自身三层图（含 stability） | 🔥 |
-| — | `mcp-tools.md` | MCP Server 5 个 tool 参考 | ✅ |
+| — | `mcp-tools.md` | MCP Server 6 个 tool 参考 | ✅ |
 | — | `gnhf-task-template.md` | gnhf 夜间自动同步集成指南 | 📝 |
 
 **不填充的分类**（agentprecept 是方法论仓库，非软件项目）：

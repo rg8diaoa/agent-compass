@@ -128,7 +128,7 @@ Write-Host "[agentprecept] AGENTS.md + 7 核心文档已就位。"
    - `cwd` 设为 agentprecept 仓库的绝对路径
    - `env.PYTHONIOENCODING=utf-8` + `env.PYTHONUTF8=1`（Windows 必需，防止 GBK 编码损坏 MCP 握手消息）
    - 完整 JSON：`{"mcpServers":{"agentprecept":{"command":"python","args":["-m","agentprecept.mcp_server"],"cwd":"<agentprecept绝对路径>","env":{"PYTHONIOENCODING":"utf-8","PYTHONUTF8":"1"}}}}`
-4. 输出：`[agentprecept] MCP 已自动配置。重启后 5 tools 可用。`
+4. 输出：`[agentprecept] MCP 已自动配置。重启后 6 tools 可用。`
 5. 提示 git init
 
 **B — CodeWhale 全局 Skill**：

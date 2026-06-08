@@ -1,6 +1,6 @@
-# agent-compass 常用 Prompt 模板
+# agentprecept 常用 Prompt 模板
 
-> 复制下面任何一段，粘贴到你的 Agent 对话中。Agent 会按 agent-compass 的方法论执行。
+> 复制下面任何一段，粘贴到你的 Agent 对话中。Agent 会按 agentprecept 的方法论执行。
 
 ---
 
@@ -9,7 +9,7 @@
 ```
 我要启动一个新项目 [项目名]，技术栈是 [Python/FastAPI/PostgreSQL]。
 
-请按 agent-compass 的完整循环，完成阶段 1-3：
+请按 agentprecept 的完整循环，完成阶段 1-3：
 1. 将我的需求展开为结构化需求文档（L1_C01）
 2. 从需求推导技术架构（L2_D01 + L2_G01 + 初始 project-graph.yaml）
 3. 初始化文档体系（INDEX.md + L1_A02 + L1_B01 + L4_O01 + HANDOFF.md）
@@ -24,7 +24,7 @@
 ```
 给我加一个新功能：[功能描述]。
 
-请按 agent-compass 的开发流程：
+请按 agentprecept 的开发流程：
 1. 先读 project-graph.yaml 确定新模块应该放在哪、会影响哪些已有模块
 2. 读 L1_A02 确认命名格式
 3. 读 L1_B01 确认不会引入新术语
@@ -42,7 +42,7 @@
 ```
 我遇到了一个 bug：[bug 描述]。
 
-请按 agent-compass 的修复流程排查：
+请按 agentprecept 的修复流程排查：
 1. 读 project-graph.yaml，确定 bug 所在模块的影响范围
 2. 读 L4_O01，确认修复不会违反已有架构约束
 3. 读 HANDOFF.md，检查是否已有排查记录
@@ -55,7 +55,7 @@
 ## 模板 4：做一次审计
 
 ```
-请对当前项目做一次完整的 agent-compass 七维审计：
+请对当前项目做一次完整的 agentprecept 七维审计：
 
 1. 命名一致性（docs/ 下所有文件名格式）
 2. 交叉引用完整性（文档间链接是否有效）
@@ -73,7 +73,7 @@
 ## 模板 5：交接当前工作
 
 ```
-当前会话即将结束。请按 agent-compass 的交接流程：
+当前会话即将结束。请按 agentprecept 的交接流程：
 
 1. 回顾本会话完成的工作
 2. 检查是否有未完成或阻塞的任务

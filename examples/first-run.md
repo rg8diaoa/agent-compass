@@ -1,11 +1,11 @@
-# agent-compass 初始化向导
+# agentprecept 初始化向导
 
 > 复制下面这段 prompt 发给 Agent，Agent 会自动走完初始化 4 步。
 
 ---
 
 ```
-我正在用 agent-compass 方法论初始化这个项目。
+我正在用 agentprecept 方法论初始化这个项目。
 
 请按以下步骤执行：
 
