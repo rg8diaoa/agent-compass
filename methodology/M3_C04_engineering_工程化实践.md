@@ -50,7 +50,7 @@ jobs:
 ### basic-audit.py 要检查什么（15 维参考）
 
 ```python
-# scripts/basic-audit.py — Agent 可以生成这个脚本，也可以手动维护
+# agentprecept/basic_audit.py — Agent 可以生成这个脚本，也可以手动维护
 import os, re, sys
 
 def check_naming(docs_dir):

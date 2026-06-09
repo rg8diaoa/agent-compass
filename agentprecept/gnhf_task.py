@@ -62,8 +62,8 @@ def render_template(output_path: str = ".gnhf/sync-task.md") -> str:
 ```
 
 ## 执行规则
-1. 运行 `python scripts/sync-graph.py src docs/project-graph.yaml`
-2. 同步完成后运行 `python scripts/basic-audit.py docs/`
+1. 运行 `python -m agentprecept.sync_graph src docs/project-graph.yaml`
+2. 同步完成后运行 `python -m agentprecept audit docs/`
 3. 如果 audit 无 FAIL: 任务完成
 4. 如果 audit 有 FAIL: 修复对应问题后重新 audit
 5. structure 中的 stability 和 description 字段必须保留
@@ -72,7 +72,7 @@ def render_template(output_path: str = ".gnhf/sync-task.md") -> str:
 
 ## 期望输出
 - `docs/project-graph.yaml` 已更新
-- `python scripts/basic-audit.py docs/` exit 0
+- `python -m agentprecept audit docs/` exit 0
 - 提交信息: `auto-sync: update project-graph ({len(diff.splitlines())} files changed)`
 """
 
@@ -86,7 +86,7 @@ def main():
     output = sys.argv[1] if len(sys.argv) > 1 else ".gnhf/sync-task.md"
     template = render_template(output)
     print(f"[gnhf] 任务模板已生成: {output}")
-    print(f"[gnhf] 使用方法: gnhf --agent claude --goal {output} --verify 'python scripts/basic-audit.py docs/'")
+    print(f"[gnhf] 使用方法: gnhf --agent claude --goal {output} --verify 'python -m agentprecept audit docs/'")
 
 
 if __name__ == "__main__":

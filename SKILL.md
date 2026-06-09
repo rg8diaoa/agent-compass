@@ -52,11 +52,12 @@ Agent 不得等待提醒、不得跳过、不得事后补做。Auto-Pilot 优先
 
 ### 防偷懒（Anti-Laziness）
 
-- 审计时：必须实际运行 `agentprecept audit`；若 CLI 不可用则运行 `python scripts/basic-audit.py`。不许凭记忆说"之前确认过"
+- 审计时：必须实际运行 `agentprecept audit`；若 CLI 不可用则运行 `python -m agentprecept.basic_audit`。不许凭记忆说"之前确认过"
 - 验证时：必须读回写入的文件内容。不许假设"写成功了"
 - 跨文件引用时：必须 `grep` 验证路径存在。不许凭记忆说"应该有"
 - 工具失败时：报告中标注 [无法验证]。不许跳过也不许造假
 - **审计缓存陷阱**：MCP tool 返回 TOOL_RESULT_REF（缓存引用）时，必须重新获取实际结果——不许把缓存引用当成"已审计"。审计结论必须来自本会话的工具实际输出
+- 完成任一模块公开函数后：在 checklist 末尾追加对应测试任务
 - git 操作异常时：index.lock 残留 → `del /f .git\index.lock` (Windows) 或 `rm .git/index.lock`；commit 失败 → 检查未追踪冲突文件
 
 ### 并行安全
@@ -87,6 +88,53 @@ Agent 不得等待提醒、不得跳过、不得事后补做。Auto-Pilot 优先
 4. 提示 git init
 
 ---
+
+### Auto-Pilot 自动动作（不可跳过）
+
+| 触发 | 动作 | 时机 |
+|------|------|:--:|
+| 代码变更 | `agentprecept sync` | 同一 turn |
+| 技术决策 | 追加 L4_O01（决策/来源/证据） | 同一 turn |
+| 会话结束 | 全量重写 HANDOFF | 结束前 |
+| > 15 轮 | HANDOFF 加 [CLOSING] | 发现时立即 |
+| 3 轮无进展 | HANDOFF 加 [BLOCKED] | 第 3 轮结束时 |
+
+**会话结束信号**：用户说结束/交接/handoff/compact、全部 checklist 完成且 2 轮无新任务、> 15 轮。
+
+**技术决策定义**（满足任一）：架构/库/框架选型、适配性修改、平台限制放弃特性、第三方依赖替换、数据 schema 变更、安全策略变更。适配性修改也算决策。
+
+### 用户口头禅映射
+
+| 用户说 | Agent 加载 |
+|------|------|
+| 初始化/init | examples/first-run.md |
+| 修 bug/fix | 00-lifecycle §阶段7 + L3_J02 |
+| 审计/audit | methodology/04 + `agentprecept audit` |
+| 发布/release | 14-production-readiness §阶段8 |
+
+### 核心模板
+
+| 模板 | 触发 |
+|------|------|
+| project-graph.yaml | 每次代码变更 |
+| L4_O01 | 做技术决策时 |
+| HANDOFF | 会话结束信号 |
+| L3_J02 | 新增公开函数/端点/命令 |
+
+### 人类审 Agent（4 项）
+
+- □ 模块 > 3: `project-graph.yaml` structure 键 ≥ 4
+- □ 有职责描述: 每个模块 `description` 字段非空
+- □ L4_O01 有依据: 文件行数 ≥ 5 + 最近一条 7 天内
+- □ 图已更新: `evolution` 最新条目同比
+
+### 状态标记
+
+[IN_PROGRESS] / [NEEDS_HUMAN_REVIEW] / [NEEDS_HUMAN_DECISION] / [BLOCKED] / [CLOSING]
+
+### 完整方法论
+
+速查卡: `reference/cheatsheet.md` | 方法论导航: `methodology/INDEX.md`
 
 ### 文档体系搭建
 

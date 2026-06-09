@@ -1,8 +1,8 @@
 """design_gate check — MCP tool 和 git hook 共享的检查逻辑
 
 用法:
-  python scripts/design_gate_check.py --files src/a.py src/b.py    # git hook 调用
-  python scripts/design_gate_check.py --module src/services        # MCP tool 调用
+  python -m agentprecept.design_gate_check --files src/a.py src/b.py    # git hook 调用
+  python -m agentprecept.design_gate_check --module src/services        # MCP tool 调用
 
 exit 0: 全部通过
 exit 1: 有缺失——设计文档需创建

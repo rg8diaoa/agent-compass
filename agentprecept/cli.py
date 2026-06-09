@@ -41,7 +41,7 @@ fi
 # --- Gate 2: design gate (shared logic with MCP tool) ---
 CHANGED_CODE=$(git diff --cached --name-only | grep -Ev '^docs/|\\.md$|\\.ya?ml$|\\.json$|\\.cfg$|\\.toml$')
 if [ -n "$CHANGED_CODE" ]; then
-    python scripts/design_gate_check.py --files $CHANGED_CODE
+    python -m agentprecept.design_gate_check --files $CHANGED_CODE
     if [ $? -eq 1 ]; then
         echo ""
         echo "[AgentPrecept] Design docs missing. Create them first."

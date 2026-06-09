@@ -50,7 +50,7 @@ SAME_PKG  — 同目录下，建议检查
 
 ```yaml
 - name: 15维审计
-  run: python scripts/basic-audit.py docs/ --scope all --gate
+  run: agentprecept audit --gate
 - name: 命名检查
   run: python scripts/check-naming.py docs/
 ```

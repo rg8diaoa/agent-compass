@@ -1,0 +1,13 @@
+fix: sync all docs — 26 outdated references + SKILL.md gap fill
+
+Project-graph relations (5): scripts/*.py → agentprecept/*.py
+cli.py pre-commit hook: scripts/design_gate_check → -m agentprecept.design_gate_check
+gnhf_task.py (4): scripts/*.py → python -m agentprecept.* 
+design_gate_check docstring: update usage examples
+AGENTS.md (2): anti-laziness fallback + audit whisper map
+SKILL.md (11): add auto-pilot-table/end-signals/tech-decision-def/verbal-map/
+  core-templates/human-review-4/status-marks/methodology-links/function-test-rule
+  + sync anti-laziness fallback path
+methodology/M3_C03 (1): audit invocation
+methodology/M3_C04 (3): audit/sync-graph/comment paths
+scripts/README.md (1): audit invocation

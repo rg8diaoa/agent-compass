@@ -180,23 +180,23 @@ relations:
   to: agentprecept/gnhf_task.py
   type: import
 - from: agentprecept/mcp_server.py
-  to: scripts/basic-audit.py
+  to: agentprecept/basic_audit.py
   type: import
 - from: agentprecept/mcp_server.py
-  to: scripts/sync-graph.py
+  to: agentprecept/sync_graph.py
   type: import
 - from: agentprecept/mcp_server.py
-  to: scripts/design_gate_check.py
+  to: agentprecept/design_gate_check.py
   type: import
 # 规范层 → 代码层 (reference)
 - from: AGENTS.md
   to: agentprecept/cli.py
   type: reference
 - from: AGENTS.md
-  to: scripts/sync-graph.py
+  to: agentprecept/sync_graph.py
   type: reference
 - from: AGENTS.md
-  to: scripts/basic-audit.py
+  to: agentprecept/basic_audit.py
   type: reference
 - from: SKILL.md
   to: AGENTS.md
