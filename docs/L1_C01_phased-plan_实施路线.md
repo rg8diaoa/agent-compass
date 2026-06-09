@@ -42,7 +42,7 @@ agentprecept mode show            # 查看当前模式
 
 ---
 
-## §1 Phase 0：当前基准（v0.4.4）— 对应 lite 模式
+## §1 Phase 0：当前基准（v0.4.0+）— 对应 lite 模式
 
 ### 已交付
 
