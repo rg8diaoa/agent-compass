@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "agentprecept"
-version = "0.4.3"
+version = "0.4.4"
 description = "AgentPrecept — AI coding agent governance toolkit (precept, not monitoring)"
 license = {text = "MIT"}
 requires-python = ">=3.10"
