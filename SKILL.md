@@ -109,7 +109,7 @@ Agent 不得等待提醒、不得跳过、不得事后补做。Auto-Pilot 优先
 |------|------|
 | 初始化/init | examples/first-run.md |
 | 修 bug/fix | 00-lifecycle §阶段7 + L3_J02 |
-| 审计/audit | methodology/04 + `agentprecept audit` |
+| 审计/audit | methodology/M4_D00 + `agentprecept audit` |
 | 发布/release | 14-production-readiness §阶段8 |
 
 ### 核心模板

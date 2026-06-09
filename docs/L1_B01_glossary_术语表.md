@@ -22,10 +22,10 @@ Agent 在生成内容前应参照本表确保用词一致。
 | HANDOFF.md | HANDOFF.md | 会话交接文件，记录 Agent 会话间的上下文传递，包含状态标记（🔥 活跃 / 📝 撰写中 / ✅ 锁定）和未完成事项 | L2_D01 |
 | MEMORY.md | MEMORY.md | 持久偏好与项目约束文件，存储跨会话的 Agent 行为偏好、项目特定规则和长期记忆 | L2_D01 |
 | L4_O01 | L4_O01 | 设计依据文档编号（层级 L4，分类 O，编号 01），记录项目关键设计决策及其理由和证据 | INDEX |
-| 设计先行 | Design-First | agentprecept 核心原则之一：在编写代码之前先完成设计文档（project-graph.yaml + 设计依据），通过 design_gate 检查后才能进入实现阶段 | methodology/03 |
-| Auto-Pilot | Auto-Pilot | agentprecept 的自动化工作流模式：Agent 在明确规范约束下自主完成 init → sync → audit 循环，无需人工干预 | methodology/15 |
+| 设计先行 | Design-First | agentprecept 核心原则之一：在编写代码之前先完成设计文档（project-graph.yaml + 设计依据），通过 design_gate 检查后才能进入实现阶段 | methodology/M1_A01 |
+| Auto-Pilot | Auto-Pilot | agentprecept 的自动化工作流模式：Agent 在明确规范约束下自主完成 init → sync → audit 循环，无需人工干预 | methodology/M4_D02 |
 | MCP Server | MCP Server | Model Context Protocol 服务端，agentprecept 提供 6 个 MCP tool（project_graph_query / decision_search / design_gate / sync_diff / audit_run / handoff_read）供外部 Agent 调用 | docs/mcp-tools |
-| 涟漪分析 | Ripple Analysis | 修改影响范围分析：当变更一个模块时，通过 project-graph.yaml 的依赖图自动计算所有受影响的上下游模块 | methodology/04 |
+| 涟漪分析 | Ripple Analysis | 修改影响范围分析：当变更一个模块时，通过 project-graph.yaml 的依赖图自动计算所有受影响的上下游模块 | methodology/M4_D00 |
 | 4-scope 审计 | 4-Scope Audit | agentprecept 的四层审计体系：文档审计（命名/引用/术语/一致性）、工程审计（覆盖率/骨架/内容）、体验审计（用户旅程/可读性/定位）、健壮审计（复用性/社区就绪度） | L2_D01 |
 
 ---

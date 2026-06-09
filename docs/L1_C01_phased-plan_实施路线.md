@@ -50,7 +50,7 @@ agentprecept mode show            # 查看当前模式
 |------|------|
 | CLI | `init`（6阶段）/ `sync`（6维扫描）/ `audit`（15维4-scope）/ `setup` / `hooks` / `gnhf` |
 | MCP | 6 个 tool（query / audit / diff / decision / handoff / design_gate） |
-| 脚本 | sync-graph / basic-audit / ripple_check / design_gate_check / graph-to-mermaid / check-naming |
+| 脚本 | agentprecept/ 包内（sync_graph/basic_audit/design_gate_check）+ scripts/ 辅助（ripple_check/graph-to-mermaid/check-naming/init） |
 | 规则 | AGENTS.md（284行，Auto-Pilot + 设计先行 + 讨论拦截 + 首次邂逅 + 新项目检测） |
 | 文档 | 方法论 18 篇 / 模板 37 个 / 狗粮层 12 个文件 |
 | 门禁 | 三层强制拦截（L1 MCP / L2 pre-commit hook / L3 CI gate） |
