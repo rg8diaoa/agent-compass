@@ -1,4 +1,4 @@
-# AgentPrecept ![version](https://img.shields.io/badge/version-v0.4.7-blue)
+# AgentPrecept ![version](https://img.shields.io/badge/version-v0.4.8-blue)
 
 > **AgentPrecept（原 agent-compass）与 Future AGI 的 "Agent Compass" 商业产品无关。**
 > 本项目的定位是 AI 编码 Agent 的方法论治理工具集——不是 LLM 可观测性平台。
