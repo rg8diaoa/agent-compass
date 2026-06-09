@@ -1,4 +1,1 @@
-fix: remove all remaining scripts/ references from docs
-
-CI audit.yml, SKILL.md, README, L1_A01, L1_C01, L2_D01,
-project-graph.yaml, M3_C00, M3_C04, skills/architecture-design
+chore: cleanup — remove scripts/ dir, build artifacts, data copies

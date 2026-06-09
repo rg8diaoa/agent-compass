@@ -1,0 +1,78 @@
+structure:
+  src/api/:
+    type: package
+    description: REST API 路由层
+    children:
+    - tasks.py
+    - auth.py
+    - middleware.py
+  src/models/:
+    type: package
+    description: 数据模型
+    children:
+    - task.py
+    - user.py
+  src/services/:
+    type: package
+    description: 业务逻辑层
+    children:
+    - task_service.py
+    - auth_service.py
+  src/db/:
+    type: package
+    description: 数据库层
+    children:
+    - connection.py
+    - migrations/
+  tests/:
+    type: package
+    description: 测试套件
+    children:
+    - test_tasks.py
+    - test_auth.py
+    - conftest.py
+  src:
+    type: package
+    stability: stable
+    children:
+    - main.py
+    - models.py
+relations:
+- from: src/api/tasks.py::create_task
+  to: src/services/task_service.py::create
+  type: calls
+- from: src/api/tasks.py::list_tasks
+  to: src/models/task.py::Task
+  type: reads
+- from: src/services/task_service.py
+  to: src/models/task.py
+  type: depends_on
+- from: src/services/auth_service.py::authenticate
+  to: src/models/user.py::User
+  type: calls
+- from: src/api/auth.py
+  to: src/services/auth_service.py
+  type: depends_on
+- from: src/models/task.py
+  to: src/db/connection.py
+  type: uses
+- from: tests/test_tasks.py
+  to: src/api/tasks.py
+  type: tests
+- from: src/main.py
+  to: ''
+  type: depends_on
+- from: src/models.py
+  to: uuid
+  type: depends_on
+evolution:
+- id: ADR-001
+  topic: 为什么用三层架构（api/services/models）
+  decision: 三层分离
+  date: 2025-01-15
+  rationale_ref: docs/L4_O01_design-rationale.md#three-layer
+- id: ADR-002
+  topic: 认证方案（API Key vs JWT）
+  decision: JWT（无状态、可扩展）
+  date: 2025-01-20
+  rationale_ref: docs/L4_O01_design-rationale.md#auth-choice

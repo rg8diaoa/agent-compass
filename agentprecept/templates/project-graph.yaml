@@ -1,0 +1,11 @@
+structure:
+  agentprecept:
+    type: package
+    stability: stable
+    children:
+    - cli.py
+relations:
+- from: agentprecept/cli.py
+  to: subprocess
+  type: depends_on
+evolution: []
