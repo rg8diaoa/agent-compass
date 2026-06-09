@@ -32,6 +32,7 @@
 - **分支纪律**：涉及架构/重命名/多文件（>10 文件）的变更必须在独立分支上执行。pre-commit hook 强制拦截 main/master 分支上 >10 文件的 commit（可 `--no-verify` 跳过）；CI gate 维度 11 不可跳过
 - **自选维度检查**：每 5 轮对话检查自选维度（用户旅程/定位审计/复用/社区就绪度）是否退化。`agentprecept audit --gate` 报告末尾有自选清单
 - **版本规则**：严格 semver。PATCH（v0.4.1）修 bug 不增删功能——累积 3+ 修复或 1 个关键修复后发布；MINOR（v0.5.0）新增向后兼容功能，每个功能独立发版不等累积；MAJOR（v1.0.0）破坏性变更。升级方式：全量（`pip install -U agentprecept`），11KB wheel 不搞增量
+- **发版铁律**：任何版本发布到 GitHub/PyPI 前，必须完成 audit --gate FAIL 0 验证 + 将验证结果展示给用户 + 等待用户明确确认（"发"/"发布"/"publish"/"go ahead"）。Agent 严禁未经用户确认私自打 tag、push、或 twine upload。这条规则高于任何自动化——即使 Auto-Pilot 也不得跳过
 - **批量创建文件**：> 15 个文件时 → 分子代理并行（单个子代理 ≤ 15 文件，超时 180s。依据：世界模拟器 37 文件迁移时 230s 超时）
 
 ---

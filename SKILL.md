@@ -19,6 +19,7 @@
 - 分支纪律：涉及架构/重命名/多文件（>10 文件）的变更必须在独立分支上执行
 - 自选维度检查：每 5 轮对话检查自选维度是否退化
 - 版本规则：严格 semver，PATCH 修 bug 累积 3+ 发版，MINOR 每个功能独立发版，MAJOR 破坏性变更
+- 发版铁律：发布到 GitHub/PyPI 前必须 audit --gate FAIL 0 + 展示结果给用户 + 等用户确认（"发/发布/publish"）。严禁未经确认私自打 tag/push/twine upload，高于任何自动化
 - ⏳ 待补检测：会话首次启动时，若 docs/ 中 ⏳ 待撰写状态的文档超过 3 份，Agent 应主动提醒"有 N 份文档待补充，要我填充吗？"
 - 狗粮检查：agentprecept 自身项目必须通过自检：① L2_D01 反映当前架构 ② init 脚本引用的 templates/ 文件全部存在 ③ project-graph relations 不为空 ④ AGENTS/SKILL/instructions 关键规则一致
 - 批量创建文件 > 15 个时 → 分子代理并行（单个子代理 ≤ 15 文件，超时 180s。依据：世界模拟器 37 文件迁移时 230s 超时）

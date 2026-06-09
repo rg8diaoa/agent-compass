@@ -313,7 +313,7 @@ def check_dogfood(docs_dir: str) -> list[dict]:
         root_files = set()
         for f in project_root.iterdir():
             name = f.name
-            if name.startswith(".") or name in ("__pycache__", "agent_compass.egg-info", "diag-result.json", "build", "dist", ".pytest_cache"):
+            if name.startswith(".") or name in ("__pycache__", "agent_compass.egg-info", "agentprecept.egg-info", "diag-result.json", "build", "dist", ".pytest_cache"):
                 continue
             root_files.add(name + "/" if f.is_dir() else name)
         graph_keys = set(structure.keys())
@@ -576,14 +576,23 @@ def check_experience(docs_dir: str) -> list[dict]:
                 "issue": f"文档 {len(lines)} 行（>300），建议拆分",
                 "severity": "FAIL"
             })
-        # 检查代码块语言标注
+        # 检查代码块语言标注（状态机：只检查 opening 标记）
         code_blocks = re.findall(r'```(\S*)', content)
-        unlabeled = [i for i, lang in enumerate(code_blocks) if not lang and i > 0]
-        if unlabeled:
-            # 排除第一块（可能是纯文本块如 ASCII 图）
+        in_block = False
+        unlabeled_count = 0
+        for lang in code_blocks:
+            if not in_block:
+                # opening 标记
+                if not lang:
+                    unlabeled_count += 1
+                in_block = True
+            else:
+                # closing 标记（标准 Markdown 不带语言标注，不计数）
+                in_block = False
+        if unlabeled_count:
             findings.append({
                 "file": f.name,
-                "issue": f"{len(unlabeled)} 个代码块未标注语言",
+                "issue": f"{unlabeled_count} 个代码块未标注语言",
                 "severity": "WARN"
             })
     return findings
