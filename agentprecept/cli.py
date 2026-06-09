@@ -359,6 +359,8 @@ USAGE = """agentprecept — AI coding agent governance toolkit
 
 
 def main():
+    if sys.stdout.encoding.lower() != 'utf-8':
+        sys.stdout.reconfigure(encoding='utf-8')
     if len(sys.argv) < 2:
         print(USAGE)
         return

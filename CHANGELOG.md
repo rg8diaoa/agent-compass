@@ -1,5 +1,20 @@
 # 变更日志
 
+## [0.4.3] — 2026-06-09
+
+### 修复
+
+- **MCP audit 路径推导错误**：`check_dogfood`/`check_readme_claims`/`check_terminology` 改用 `_find_project_root(docs_dir)` 向上查找项目根目录（以 `.git` 为边界），不再依赖 CWD。修复传入 `docs_dir="world-simulator/docs"` 时狗粮维度 3 项假阳性
+- **CLI GBK 编码崩溃**：`main()` 入口添加 `sys.stdout.reconfigure(encoding='utf-8')`，防止 Windows GBK 终端无法编码 emoji
+- **包入口缺失**：新增 `agentprecept/__main__.py`，支持 `python -m agentprecept`
+- **`__version__` 缺失**：`__init__.py` 导出 `__version__`，从 `importlib.metadata` 读取
+
+### 恢复
+
+- 恢复 7 个被误删的模板文件（`Path.replace()` 移动而非复制的 bug 仍待修复）
+
+---
+
 ## [0.4.0] — 2026-06-09
 
 ### project-graph 全量重建

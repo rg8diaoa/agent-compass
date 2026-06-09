@@ -8,6 +8,19 @@ import os, re, sys
 from pathlib import Path
 
 
+def _find_project_root(docs_dir: str) -> Path:
+    """从 docs_dir 向上查找项目根目录（以 .git 为边界）。
+    
+    向上遍历直至找到 .git，不超过 .git 边界。
+    若未找到 .git 则回退到 docs_dir 的父目录。
+    """
+    p = Path(docs_dir).resolve()
+    for parent in [p] + list(p.parents):
+        if (parent / ".git").is_dir():
+            return parent
+    return Path(docs_dir).resolve().parent
+
+
 def check_naming(docs_dir: str) -> list[dict]:
     """维度 1: 文件名是否符合 L{Level}_{CAT}{NN}_{Slug}_{Title}.md"""
     pattern = r'^L[1-4]_[A-P]\d{2}_[a-z0-9-]+_.+\.md$'
@@ -290,6 +303,7 @@ def check_coverage(docs_dir: str) -> list[dict]:
 def check_dogfood(docs_dir: str) -> list[dict]:
     """维度 8: 狗粮审计 — 项目自身被自己管理的程度"""
     findings = []
+    project_root = _find_project_root(docs_dir)
     
     # 1. 图覆盖率: 项目根目录文件是否都在 structure 中
     try:
@@ -297,7 +311,7 @@ def check_dogfood(docs_dir: str) -> list[dict]:
         graph = yaml.safe_load(Path(docs_dir, "project-graph.yaml").read_text(encoding="utf-8")) or {}
         structure = graph.get("structure", {})
         root_files = set()
-        for f in Path(".").iterdir():
+        for f in project_root.iterdir():
             name = f.name
             if name.startswith(".") or name in ("__pycache__", "agent_compass.egg-info", "diag-result.json", "build", "dist", ".pytest_cache"):
                 continue
@@ -316,8 +330,8 @@ def check_dogfood(docs_dir: str) -> list[dict]:
     # 跳过自引用检查（避免无限递归）
     
     # 3. 工具链: pre-commit hook + CI gate
-    hook = Path(".git/hooks/pre-commit")
-    ci_gate = Path(".github/workflows/audit.yml")
+    hook = project_root / ".git" / "hooks" / "pre-commit"
+    ci_gate = project_root / ".github" / "workflows" / "audit.yml"
     if not hook.exists():
         findings.append({"file": ".git/hooks/pre-commit", "issue": "pre-commit hook 未安装——运行 agentprecept hooks install", "severity": "WARN"})
     if not ci_gate.exists():
@@ -340,7 +354,8 @@ def check_dogfood(docs_dir: str) -> list[dict]:
 def check_readme_claims(docs_dir: str) -> list[dict]:
     """维度 9: README 数字声明 vs 实际数量"""
     findings = []
-    readme = Path("README.md")
+    project_root = _find_project_root(docs_dir)
+    readme = project_root / "README.md"
     if not readme.exists():
         findings.append({"file": "README.md", "issue": "文件不存在", "severity": "FAIL"})
         return findings
@@ -361,7 +376,7 @@ def check_readme_claims(docs_dir: str) -> list[dict]:
         if not m:
             continue
         claimed = int(m.group(1))
-        p = Path(path)
+        p = project_root / path
         if method == "glob":
             actual = len(list(p.rglob(pattern))) if p.is_dir() else -1
         else:
@@ -467,7 +482,8 @@ def check_terminology(docs_dir: str) -> list[dict]:
     glossary = Path(docs_dir) / "L1_B01_glossary_术语表.md"
     if not glossary.exists():
         # 检查 templates/ 下是否存在（新项目 init 后会有）
-        tmpl = Path("templates") / "L1_B01_glossary_术语表.md"
+        project_root = _find_project_root(docs_dir)
+        tmpl = project_root / "templates" / "L1_B01_glossary_术语表.md"
         if tmpl.exists():
             findings.append({
                 "file": "L1_B01_glossary_术语表.md",
