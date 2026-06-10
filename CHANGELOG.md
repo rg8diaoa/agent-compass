@@ -4,7 +4,7 @@
 
 ### 安全修复
 
-- **init 幂等保护**：`Copy-Item`/`cp` 无条件覆盖 → 逐文件存在性检查。已存在则 `[SKIP]` 跳过，防止已有项目 HANDOFF/MEMORY/project-graph 被模板覆盖导致数据丢失
+- **init 幂等保护**：`Copy-Item`/`cp` 无条件覆盖 → 逐文件存在性检查（已存在则 `[SKIP]`）
 - **init 双模式拆分**：默认模式幂等安装（SKIP 已存在文件）；`-Update`/`--update` 模式覆盖框架文件（AGENTS.md/SKILL.md/skills/），用户数据（docs/ 下 7 文件）永不覆盖
 - **选项 B 安装扩展**：CodeWhale 全局 Skill 安装从单文件（SKILL.md）扩展为 6 文件（SKILL.md + skills/ 下 5 个 companion skill）
 
@@ -12,7 +12,12 @@
 
 - **AGENTS.md**：选项 A 补充 `-Update` 升级用法；选项 B 安装命令从 1 文件扩展为 6 文件
 - **SKILL.md**：选项 B 描述同步更新
-- **L4_O01**：追加 init 双模式设计依据
+- **L4_O01**：追加 init 双模式 + pre-commit hook 路径修复 + MCP 路径解析设计依据
+- **L2_D01**：删除重复 CLI+MCP 层 + 补 gnhf_task.py + scripts/ → agentprecept/
+- **L1_C01**：8 个代码块添加 text 语言标注
+- **README.md**：升级章节拆为 CLI/框架两段
+- **pre-commit hook**：Gate 2 过时路径修复（scripts/ → agentprecept/）+ Gate 4 全文 grep → diff 新增行匹配
+- **basic_audit.py**：12 个维度统一 `_resolve_docs()` 解决 MCP 路径假阳性
 
 ---
 

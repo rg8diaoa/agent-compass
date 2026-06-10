@@ -133,7 +133,7 @@ python -m agentprecept.mcp_server   # 启动 MCP Server（6 tools）
 
 ## 数字
 
-- 18 篇方法论 + 37 个模板（16/16 分类全齐）+ 5 个 Skill
+- 19 篇方法论 + 37 个模板（16/16 分类全齐）+ 5 个 Skill
 - Python 和 Node.js 双语言可运行示例
 - 15 维审计框架 + 8 阶段生产就绪标准
 
@@ -240,10 +240,10 @@ agentprecept/
 │ ├── project-graph.yaml  ← 项目结构图
 │ ├── HANDOFF.md          ← 会话交接
 │ ├── MEMORY.md           ← 持久记忆（自动生长）
-│ ├── L4_O01              ← 设计依据（44+ ADR）
+│ ├── L4_O01              ← 设计依据（64+ ADR）
 │ └── mcp-tools.md        ← MCP 6 tool API
 ├── skills/            ← 5 个核心 Skill
-├── methodology/       ← 18 篇方法论（M{1-4}_{A-D}{NN} 四板块体系）
+├── methodology/       ← 19 篇方法论（M{1-4}_{A-D}{NN} 四板块体系）
 ├── templates/         ← 37 个模板（16分类全齐，init 核心 8 个）
 ├── examples/          ← Python/Node 示例 + prompt 模板 + first-run
 ├── reference/         ← 审计案例/多维图/横向对比/速查卡片
