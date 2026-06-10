@@ -11,7 +11,7 @@
 
 AgentPrecept 提供四级治理深度，用户按需选择：
 
-```
+```text
 lite           normal（默认）      pro                max
 基础治理  ──→  深度约束    ──→   极致协议     ──→   运行时引擎
 ```
@@ -23,7 +23,7 @@ lite           normal（默认）      pro                max
 | **pro** | 极致协议 | 自检循环 + 跨会话债务追踪 + 宿主 hook 脚本生成 | 生产级团队、需要强制合规 |
 | **max** | 运行时引擎 | 常驻 MCP Server + ap run 实际执行 + 代理调度 + 实时进度 | 全自动开发、无人值守 |
 
-```
+```text
 normal = lite + 规则硬化 + 自动检查点 + 代理弹药库 + Skill 查询
 pro    = normal + 自检循环 + 跨会话债务强制执行 + 宿主 hook 生成
 max    = pro + 常驻服务 + ap run 执行引擎 + 工作流状态机 + 代理调度
@@ -92,7 +92,7 @@ lite 是所有能力的子集。任何模式可降级到 lite（`ap mode switch 
 
 ### 门禁
 
-```
+```text
 Phase 1 通过标准:
   □ ap init（默认 normal）在新项目跑通
   □ ap status 展示 mode=normal + phase
@@ -132,7 +132,7 @@ Phase 1 通过标准:
 
 ### 门禁
 
-```
+```text
 Phase 2 通过标准:
   □ ap review --type security 输出 ≥ 3 条审查点
   □ ap skill search "python" 返回 python-patterns
@@ -161,7 +161,7 @@ Phase 2 通过标准:
 
 ### 门禁
 
-```
+```text
 Phase 3 通过标准:
   □ ap compound 在示例项目上输出 ≥ 3 条建议
   □ ap diagnose 在已知错误上输出正确匹配
@@ -211,7 +211,7 @@ Phase 3 通过标准:
 
 ### 门禁
 
-```
+```text
 Phase 4 通过标准:
   □ ap generate-hook --target claude-code 产出可执行 hook 文件
   □ pro 模式 init 后 AGENTS.md 含自检循环协议
@@ -247,7 +247,7 @@ Phase 4 通过标准:
 
 ### max 模式运行时架构
 
-```
+```text
 ┌─────────────────────────────────────────────┐
 │                agentprecept serve             │
 │  ┌───────────┐  ┌───────────┐  ┌─────────┐  │
@@ -307,7 +307,7 @@ $ ap run "实现用户登录功能，支持 JWT"
 
 ### 门禁
 
-```
+```text
 Phase 5 通过标准:
   □ agentprecept serve 启动后 MCP 握手成功
   □ ap run "实现 echo 端点" 走完 IDEA→PLAN→WORK→REVIEW→COMPOUND
