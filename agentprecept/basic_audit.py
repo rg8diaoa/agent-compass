@@ -33,12 +33,16 @@ def _find_project_root(docs_dir: str) -> Path:
             return parent
     return r.parent
 
+def _resolve_docs(docs_dir: str) -> Path:
+    """Resolve docs_dir to an absolute Path for MCP-safe file access."""
+    return _find_project_root(docs_dir) / Path(docs_dir)
+
 
 def check_naming(docs_dir: str) -> list[dict]:
     """维度 1: 文件名是否符合 L{Level}_{CAT}{NN}_{Slug}_{Title}.md"""
     pattern = r'^L[1-4]_[A-P]\d{2}_[a-z0-9-]+_.+\.md$'
     findings = []
-    for f in Path(docs_dir).glob("*.md"):
+    for f in _resolve_docs(docs_dir).glob("*.md"):
         if not f.name.startswith("L"):
             continue
         if not re.match(pattern, f.name):
@@ -49,7 +53,7 @@ def check_naming(docs_dir: str) -> list[dict]:
 def check_broken_links(docs_dir: str) -> list[dict]:
     """维度 2: 交叉引用断链"""
     findings = []
-    for f in Path(docs_dir).glob("*.md"):
+    for f in _resolve_docs(docs_dir).glob("*.md"):
         content = f.read_text(encoding="utf-8")
         refs = re.findall(r'\(([^)]+\.md)\)', content)
         for ref in refs:
@@ -69,7 +73,7 @@ def check_numbering(docs_dir: str) -> list[dict]:
     findings = []
     groups = {}
 
-    for f in Path(docs_dir).glob("L*.md"):
+    for f in _resolve_docs(docs_dir).glob("L*.md"):
         m = pattern.match(f.name)
         if not m:
             continue
@@ -99,7 +103,7 @@ def check_numbering(docs_dir: str) -> list[dict]:
 def check_skeleton(docs_dir: str) -> list[dict]:
     """维度 4: 骨架残留 — placeholder / TODO / FIXME / TBD"""
     findings = []
-    for f in Path(docs_dir).glob("*.md"):
+    for f in _resolve_docs(docs_dir).glob("*.md"):
         content = f.read_text(encoding="utf-8")
         if "placeholder" in content:
             findings.append({
@@ -121,7 +125,7 @@ def check_skeleton(docs_dir: str) -> list[dict]:
 
 def check_graph_schema(docs_dir: str) -> list[dict]:
     """维度 5: project-graph.yaml 格式校验"""
-    graph_path = Path(docs_dir) / "project-graph.yaml"
+    graph_path = _resolve_docs(docs_dir) / "project-graph.yaml"
     findings = []
 
     if not graph_path.exists():
@@ -245,7 +249,7 @@ def check_graph_schema(docs_dir: str) -> list[dict]:
 def check_design_trace(docs_dir: str) -> list[dict]:
     """维度 6: 设计追溯 — L4_O01 是否存在 + 是否有足够内容"""
     findings = []
-    l4_path = Path(docs_dir) / "L4_O01_design-rationale_设计依据.md"
+    l4_path = _resolve_docs(docs_dir) / "L4_O01_design-rationale_设计依据.md"
 
     if not l4_path.exists():
         findings.append({
@@ -278,7 +282,7 @@ def check_design_trace(docs_dir: str) -> list[dict]:
 def check_coverage(docs_dir: str) -> list[dict]:
     """维度 7: 覆盖率 — INDEX.md 引用的文档 vs 实际存在的文件"""
     findings = []
-    index_path = Path(docs_dir) / "INDEX.md"
+    index_path = _resolve_docs(docs_dir) / "INDEX.md"
 
     if not index_path.exists():
         findings.append({
@@ -290,7 +294,7 @@ def check_coverage(docs_dir: str) -> list[dict]:
 
     content = index_path.read_text(encoding="utf-8")
     refs = re.findall(r'`(L[1-4]_[A-P]\d{2}_.+?\.md)`', content)
-    actual_files = {f.name for f in Path(docs_dir).glob("L*.md")}
+    actual_files = {f.name for f in _resolve_docs(docs_dir).glob("L*.md")}
 
     for ref in refs:
         if ref not in actual_files:
@@ -358,7 +362,7 @@ def check_dogfood(docs_dir: str) -> list[dict]:
         "L4_O01_design-rationale_设计依据.md": "设计依据",
     }
     for fname, desc in required.items():
-        if not (Path(docs_dir) / fname).exists():
+        if not (_resolve_docs(docs_dir) / fname).exists():
             findings.append({"file": fname, "issue": f"一等公民文档缺失: {desc}", "severity": "FAIL"})
     
     return findings
@@ -453,7 +457,7 @@ def check_commit_size(docs_dir: str) -> list[dict]:
 def check_design_coverage(docs_dir: str) -> list[dict]:
     """维度 10: 代码模块是否有对应的设计文档"""
     findings = []
-    graph_path = Path(docs_dir) / "project-graph.yaml"
+    graph_path = _resolve_docs(docs_dir) / "project-graph.yaml"
     if not graph_path.exists():
         return findings
 
@@ -469,7 +473,7 @@ def check_design_coverage(docs_dir: str) -> list[dict]:
             continue
         design_docs = meta.get("design_docs", [])
         for dd in design_docs:
-            matches = list(Path(docs_dir).glob(f"{dd}*.md"))
+            matches = list(_resolve_docs(docs_dir).glob(f"{dd}*.md"))
             if not matches:
                 findings.append({
                     "file": module_path,
@@ -492,7 +496,7 @@ def check_design_coverage(docs_dir: str) -> list[dict]:
 def check_terminology(docs_dir: str) -> list[dict]:
     """维度 13: 术语表是否存在"""
     findings = []
-    glossary = Path(docs_dir) / "L1_B01_glossary_术语表.md"
+    glossary = _resolve_docs(docs_dir) / "L1_B01_glossary_术语表.md"
     if not glossary.exists():
         # 检查 templates/ 下是否存在（新项目 init 后会有）
         project_root = _find_project_root(docs_dir)
@@ -523,7 +527,7 @@ def check_terminology(docs_dir: str) -> list[dict]:
 def check_content_consistency(docs_dir: str) -> list[dict]:
     """维度 14: 跨文档数字矛盾检测"""
     findings = []
-    docs_path = Path(docs_dir)
+    docs_path = _resolve_docs(docs_dir)
     # 定义关键概念及其在各文档中的声明
     concepts = {
         "架构层数": [
@@ -580,7 +584,7 @@ def check_content_consistency(docs_dir: str) -> list[dict]:
 def check_experience(docs_dir: str) -> list[dict]:
     """维度 15: 体验审计——文档巨墙 + 代码块语言标注"""
     findings = []
-    for f in Path(docs_dir).glob("*.md"):
+    for f in _resolve_docs(docs_dir).glob("*.md"):
         content = f.read_text(encoding="utf-8")
         lines = content.split("\n")
         if len(lines) > 300:
