@@ -57,6 +57,7 @@
 | 为什么 checklist 项必须对齐 commit 粒度 | 实战教训 | 粗粒度 checklist（"完成用户认证模块"）导致 item 停留过久，commit 过大不可独立 revert。标准：1-3 commit/item |
 | 为什么审计从 8 维扩展为 10 维 | 狗粮升级 | 外部评价指出"README 宣称与实现之间有落差"。新增维度 9（README 声明校验）+ 维度 10（设计覆盖检查） |
 | 为什么分支检查要有工程化保障 | 规则空洞 | MEMORY.md 记录了"重大变更走分支"但 pre-commit hook 不检查。升级 hook 追加 Gate 1（>10 文件 on main → 阻止）+ CI 侧新增维度 11（分支策略检查）。规则不能只靠 Agent 自觉 |
+| 为什么 pre-commit hook 的 Gate 2/Gate 4 需要修复路径与误判 | 用户反馈 | Gate 2 引用已删除的 `scripts/design_gate_check.py`（v0.4.6 已迁入 agentprecept/ 包），改为 `python -m agentprecept.design_gate_check`。Gate 4 全文 grep `[NEEDS_HUMAN_REVIEW]` 把 AGENTS.md/SKILL.md 中的规则说明文本当待审标记，改为 `git diff --cached -U0 | grep '^+.*'` 只匹配 diff 新增行 |
 | 为什么 init 脚本需要 -Update 开关拆分框架/用户数据 | 用户反馈 | 首次安装需要幂等（SKIP 已存在文件），版本升级需要覆盖框架文件（AGENTS.md/SKILL.md/skills/）而不触碰用户数据（docs/ 下 7 文件）。双文件分类：框架文件 7 个（AGENTS.md + SKILL.md + skills/ 5 个）用 -Update 覆盖；用户数据 7 个（docs/ 下全部）永不覆盖。选项 B 同步扩展为安装 6 文件 |
 | 为什么 init 脚本所有 Copy-Item/cp 需要加存在性检查 | 用户反馈 | 无条件覆盖可能导致已有项目数据丢失——HANDOFF（会话状态）、MEMORY（偏好约束）、project-graph（结构图）全部被模板覆盖。修复：每个文件复制前检查目标是否存在，已存在则 `[SKIP]` 跳过，不存在才复制。init 变为幂等操作 |
 | 为什么 commit 粒度和 NEEDS_HUMAN_REVIEW 要进 hook | 最后两道防线 | 单 commit >15 代码文件（Gate 3）+ staged 含 NEEDS_HUMAN_REVIEW（Gate 4）——这两项在 hook 层可自动化检测。CI 侧维度 12 补冗余告警。语义判断（"真的需要 15 文件一起改？"）仍是 Agent 自觉，但极端异常已被拦截 |
